@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Arme{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+
+        <h1 style="text-align: center; margin-top: 2%;margin-bottom: 2%">Arme</h1>
+
+        <table class="table offset-3 col-sm-6">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ arme.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ arme.nom }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a class="btn btn-lg btn-info offset-3 col-sm-3" href="{{ path('arme_index') }}">Retour</a>
+
+        <a class="btn btn-lg btn-warning col-sm-3" href="{{ path('arme_edit', {'id': arme.id}) }}">Modifier</a>
+{#
+        {{ include('arme/_delete_form.html.twig') }}#}
+    </div>
+{% endblock %}
