@@ -47,14 +47,6 @@ class TireurType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
             ])
-            ->add('armes', EntityType::class, [
-                'required' => true,
-                'class' => Arme::class,
-                'choice_label' => 'nom',
-                'label' => 'nom',
-                'multiple' => true,
-                'expanded' => false,
-            ])
         ;
     }
 

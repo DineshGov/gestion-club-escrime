@@ -82,7 +82,10 @@ class Membre implements UserInterface
      */
     private $commentaireLecons;
 
-
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
 
     public function __construct()
     {
@@ -314,11 +317,15 @@ class Membre implements UserInterface
      *
      * @return (Role|string)[] The user roles
      */
-    public function getRoles()
-    {
-        return [
-            $this->isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER',
-        ];
+    public function getRoles() {
+        if (empty($this->roles)) {
+            return ['ROLE_ADMIN'];
+        }
+        return $this->roles;
+    }
+
+    function addRole($role) {
+        $this->roles[] = $role;
     }
 
 

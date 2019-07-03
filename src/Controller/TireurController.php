@@ -40,7 +40,7 @@ class TireurController extends AbstractController
             $password = $passwordEncoder->encodePassword($tireur->getMembre(), $tireur->getMembre()->getRawPassword());
             //$password = $passwordEncoder->encodePassword($membre, $membre->getPassword());
             $tireur->getMembre()->setPassword($password);
-            //$user->addRole("ROLE_ADMIN");
+            $tireur->getMembre()->addRole("ROLE_TIREUR");
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tireur->getMembre());
