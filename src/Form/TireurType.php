@@ -34,8 +34,7 @@ class TireurType extends AbstractType
                 'label' => 'Groupe',
                 'multiple' => false,
                 'expanded' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
