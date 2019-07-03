@@ -3,11 +3,11 @@
 {% block title %}Edit Competition{% endblock %}
 
 {% block body %}
-    <h1>Edit Competition</h1>
+    <h1 style="text-align: center;margin-bottom: 2%;margin-top: 2%">Modification Compétition</h1>
 
     {{ include('competition/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('competition_index') }}">back to list</a>
+    <a style="margin-top: 2%" class="btn btn-lg btn-info" href="{{ path('competition_index') }}">Retour</a>
 
-    {{ include('competition/_delete_form.html.twig') }}
+    {#{{ include('competition/_delete_form.html.twig') }}#}
 {% endblock %}

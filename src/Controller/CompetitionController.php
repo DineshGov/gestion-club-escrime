@@ -93,4 +93,16 @@ class CompetitionController extends AbstractController
 
         return $this->redirectToRoute('competition_index');
     }
+
+    /**
+     * @Route("/{id}/tireurs", name="competition_tireurs", methods={"GET"})
+     */
+    public function tireurs(Request $request, Competition $competition): Response
+    {
+        return $this->render('competition/tireurs.html.twig', [
+            'tireurs' => $competition->getTireurs(),
+        ]);
+    }
+
+
 }

@@ -1,4 +1,59 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% block body %}
+    <div class="container">
+    {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom) }}
+                {{ form_errors(form.nom) }}
+            </div>
+
+            <div class="col-sm-5">
+                {{ form_label(form.date) }}
+                {{ form_widget(form.date) }}
+                {{ form_errors(form.date) }}
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form_label(form.ville) }}
+                {{ form_widget(form.ville) }}
+                {{ form_errors(form.ville) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_label(form.niveau) }}
+                {{ form_widget(form.niveau) }}
+                {{ form_errors(form.niveau) }}
+            </div>
+
+        </div>
+
+
+        <br>
+        <br>
+        <div class="row">
+
+            <div class="col-sm-6">
+                {{ form_label(form.tireurs) }}
+                {{ form_widget(form.tireurs) }}
+                {{ form_errors(form.tireurs) }}
+            </div>
+
+
+            <div class="col-sm-6">
+                {{ form_label(form.arbitres) }}
+                {{ form_widget(form.arbitres) }}
+                {{ form_errors(form.arbitres) }}
+            </div>
+
+        </div>
+
+    </div>
+
+        <button style="margin-top: 2%;float: right" class="btn btn-lg btn-success">{{ button_label|default('Ajouter') }}</button>
+    {{ form_end(form) }}
+{%  endblock %}
