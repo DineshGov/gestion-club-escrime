@@ -84,6 +84,7 @@ class Tireur
 
     public function __construct()
     {
+        $this->membre = new Membre();
         $this->competitions = new ArrayCollection();
         $this->entrainements = new ArrayCollection();
         $this->lecons = new ArrayCollection();
@@ -339,5 +340,11 @@ class Tireur
         }
 
         return $this;
+    }
+
+    public function __toString(): ?string
+    {
+        // TODO: Implement __toString() method.
+        return $this->membre;
     }
 }

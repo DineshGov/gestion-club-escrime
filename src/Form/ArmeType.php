@@ -13,7 +13,7 @@ class ArmeType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('tireurs')
+           // ->add('tireurs')
         ;
     }
 

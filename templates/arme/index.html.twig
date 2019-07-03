@@ -3,33 +3,40 @@
 {% block title %}Arme index{% endblock %}
 
 {% block body %}
-    <h1>Arme index</h1>
+    <div class="container">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for arme in armes %}
-            <tr>
-                <td>{{ arme.id }}</td>
-                <td>{{ arme.nom }}</td>
-                <td>
-                    <a href="{{ path('arme_show', {'id': arme.id}) }}">show</a>
-                    <a href="{{ path('arme_edit', {'id': arme.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('arme_new') }}">Create new</a>
+        <h1 style="text-align: center;margin-top: 2%;margin-bottom: 2%">Liste Armes</h1>
+        <a class=" btn btn-lg btn-primary" href="{{ path('niveau_new') }}" style="float: right; margin-bottom: 2%" >Ajouter</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for arme in armes %}
+                <tr>
+                    <td>{{ arme.id }}</td>
+                    <td>{{ arme.nom }}</td>
+                    <td>
+                        <a class="btn btn-lg btn-success" href="{{ path('arme_show', {'id': arme.id}) }}">Voir</a>
+                        <a class="btn btn-lg btn-warning" href="{{ path('arme_edit', {'id': arme.id}) }}">Modifier</a>
+                        <a>{{ include('arme/_delete_form.html.twig') }}</a>
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+>>>>>>> 894a9b8bf94f2108483c23da12a88e4bea787601
 {% endblock %}

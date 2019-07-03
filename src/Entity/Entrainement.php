@@ -37,7 +37,7 @@ class Entrainement
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\MaitreArme", inversedBy="entrainements")
      */
-    private $entraineurs;
+        private $entraineurs;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Lecon", mappedBy="entrainement", orphanRemoval=true)
@@ -114,10 +114,11 @@ class Entrainement
     /**
      * @return Collection|MaitreArme[]
      */
-    public function getEntraineurs(): Collection
+    public function getEntraineurs():Collection
     {
         return $this->entraineurs;
     }
+    
 
     public function addEntraineur(MaitreArme $entraineur): self
     {

@@ -3,11 +3,11 @@
 {% block title %}Edit Niveau{% endblock %}
 
 {% block body %}
-    <h1>Edit Niveau</h1>
+    <h1 style="text-align: center">Modification Niveau</h1>
 
-    {{ include('niveau/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('niveau/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('niveau_index') }}">back to list</a>
+    {#<a class="btn btn-info" href="{{ path('niveau_index') }}">Retour</a>#}
 
-    {{ include('niveau/_delete_form.html.twig') }}
+{# {{ include('niveau/_delete_form.html.twig') }} #}
 {% endblock %}

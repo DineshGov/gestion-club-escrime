@@ -68,22 +68,6 @@ class Membre implements UserInterface
     private $rawPassword;
 
     /**
-     * @return mixed
-     */
-    public function getRawPassword()
-    {
-        return $this->rawPassword;
-    }
-
-    /**
-     * @param mixed $rawPassword
-     */
-    public function setRawPassword($rawPassword)
-    {
-        $this->rawPassword = $rawPassword;
-    }
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Objectif", mappedBy="attribuePar", orphanRemoval=true)
      */
     private $objectifsAttribues;
@@ -192,6 +176,22 @@ class Membre implements UserInterface
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRawPassword()
+    {
+        return $this->rawPassword;
+    }
+
+    /**
+     * @param mixed $rawPassword
+     */
+    public function setRawPassword($rawPassword)
+    {
+        $this->rawPassword = $rawPassword;
     }
 
     /**
@@ -354,5 +354,12 @@ class Membre implements UserInterface
     {
         $this->rawPassword = null;
     }
+
+    // TODO: Implement __toString() method.
+    /*public function __toString()
+    {
+
+        return $this->nom;
+    }*/
 
 }

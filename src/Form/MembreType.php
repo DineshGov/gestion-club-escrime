@@ -28,7 +28,7 @@ class MembreType extends AbstractType
             ->add('dateDeNaissance', BirthdayType::class)
             ->add('sexe')
             ->add('isAdmin')
-            ->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
+            //->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])
         ;
     }
 

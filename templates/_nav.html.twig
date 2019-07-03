@@ -18,12 +18,19 @@
         </a>
         <ul class="navbar-nav mr-auto">
             {#{% if is_granted('ROLE_ADMIN') %}#}
-            <li class="nav-item" style="padding-right: 10px">
-                <a class="nav-link " href="{{path('competition_new')}}">Compétitions</a>
+            <li class="nav-item dropdown" style="margin-right: 30px">
+                <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Compétitions
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('niveau_new') }}">Ajouter un niveau</a>
+                    <a class="dropdown-item" href="{{ path('niveau_index') }}">Liste niveaux</a>
+                </div>
             </li>
             {#{% endif %}#}
             <li class="nav-item" style="padding-right: 10px">
-                <a class="nav-link " href="">Entrainements</a>
+                <a class="nav-link " href="{{ path('entrainement_index') }}">Entrainements</a>
             </li>
             <li class="nav-item dropdown" style="margin-right: 30px">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -31,9 +38,11 @@
                     Tireur
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="">Objectifs</a>
-                    <a class="dropdown-item" href="">Leçons</a>
-                    <a class="dropdown-item" href="">Présences</a>
+                    <a class="dropdown-item" href="{{ path('tireur_new') }}">Ajouter tireur</a>
+                    <a class="dropdown-item" href="{{ path('tireur_index') }}">Liste tireur</a>
+                    <a class="dropdown-item" href="{{ path('objectif_index') }}">Objectifs</a>
+                    <a class="dropdown-item" href="{{ path('lecon_index') }}">Leçons</a>
+                    <a class="dropdown-item" href="{{ path('presence_index') }}">Présences</a>
                     <a class="dropdown-item" href="">
                         <span class="oi oi-command"></span>
                         Performance</a>
@@ -41,10 +50,22 @@
             </li>
 
                 <li class="nav-item" style="">
-                    <a class="nav-link " href="">
+                    <a class="nav-link " href="{{ path('maitre_arme_index') }}">
                         <span class="oi oi-account-logout"></span>
                         Maitre d'arme</a>
                 </li>
+
+            <li class="nav-item dropdown" style="margin-right: 30px">
+                <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Armes
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('arme_new') }}">Ajouter une arme</a>
+                    <a class="dropdown-item" href="{{ path('arme_index') }}">Liste Arme</a>
+                </div>
+            </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="">
@@ -53,6 +74,20 @@
                     </a>
 
                 </li>
+
+                <li class="nav-item" style="">
+                    <a class="nav-link " href="{{ path('groupe_index') }}">
+                        <span class="oi oi-account-logout"></span>
+                        Groupe</a>
+                </li>
+
+                <li class="nav-item" style="">
+                    <a class="nav-link " href="{{ path('arbitre_index') }}">
+                        <span class="oi oi-account-logout"></span>
+                        Arbitre</a>
+                </li>
+
+
 
 
   {#          {% if is_granted('ROLE_ADMIN') %}#}

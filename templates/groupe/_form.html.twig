@@ -1,4 +1,14 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+
+
+        {{ form_start(form) }}
+
+            {{ form_label(form.nom) }}
+            {{ form_widget(form.nom) }}
+            {{ form_errors(form.nom) }}<br>
+            <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+
+            {{ form_end(form) }}
+
+
+
+

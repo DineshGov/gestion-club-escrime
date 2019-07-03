@@ -1,4 +1,95 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-sm-4">
+                {{ form_label(form.membre.nom) }}
+                {{ form_widget(form.membre.nom) }}
+                {{ form_errors(form.membre.nom) }}
+            </div>
+
+            <div class="col-sm-4">
+                {{ form_label(form.membre.prenom) }}
+                {{ form_widget(form.membre.prenom) }}
+                {{ form_errors(form.membre.prenom) }}
+            </div>
+
+            <div class="col-sm-4">
+                {{ form_label(form.membre.dateDeNaissance) }}
+                {{ form_widget(form.membre.dateDeNaissance) }}
+                {{ form_errors(form.membre.dateDeNaissance) }}
+            </div>
+        </div>
+        <br>
+        <div class="row">
+
+            <div class="col-sm-4">
+                {{ form_label(form.membre.sexe) }}
+                {{ form_widget(form.membre.sexe) }}
+                {{ form_errors(form.membre.sexe) }}
+            </div>
+
+            <div class="col-sm-4">
+                {{ form_label(form.membre.email) }}
+                {{ form_widget(form.membre.email) }}
+                {{ form_errors(form.membre.email) }}
+            </div>
+
+            <div class="col-sm-4">
+                {{ form_widget(form.membre.rawPassword) }}
+                {{ form_errors(form.membre.rawPassword) }}
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+
+            <div class="col-sm-4" style="margin-top: 3%">
+                {{ form_label(form.membre.isAdmin) }}
+                {{ form_widget(form.membre.isAdmin) }}
+                {{ form_errors(form.membre.isAdmin) }}
+            </div>
+
+            <div class="col-sm-4">
+                {{ form_label(form.blason) }}
+                {{ form_widget(form.blason) }}
+                {{ form_errors(form.blason) }}
+            </div>
+
+            <div class="col-sm-4">
+                {{ form_label(form.niveauSurclassement) }}
+                {{ form_widget(form.niveauSurclassement) }}
+                {{ form_errors(form.niveauSurclassement) }}
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4" style="margin-top: 3%">
+                {{ form_label(form.niveau) }}
+                {{ form_widget(form.niveau) }}
+                {{ form_errors(form.niveau) }}
+            </div>
+
+            <div class="col-sm-4" style="margin-top: 3%">
+                {{ form_label(form.groupe) }}
+                {{ form_widget(form.groupe) }}
+                {{ form_errors(form.groupe) }}
+            </div>
+
+            <div class="col-sm-4" style="margin-top: 3%">
+                {{ form_label(form.armes) }}
+                {{ form_widget(form.armes) }}
+                {{ form_errors(form.armes) }}
+            </div>
+
+            <div class="offset-9 col-sm-3" style="margin-top: 6%; ">
+                <button class="btn btn-lg btn-block btn-success">{{ button_label|default('Ajouter') }}</button>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+
+
+    </div>
+{%  endblock %}
