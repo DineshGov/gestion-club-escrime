@@ -21,7 +21,22 @@
                 <td>{{ tireur.id }}</td>
                 <td>{{ tireur.blason }}</td>
                 <td>{{ tireur.niveauSurclassement }}</td>
-                <td>{{ tireur.arme }}</td>
+                <td>
+                    <ul>
+                    {% for arme in tireur.armes %}
+                        <ul>
+                            <li>{{ arme.nom }}</li>
+                            <li href="{{ path('arme_show', {'id': arme.id}) }}">show</li>
+                            <li href="{{ path('arme_edit', {'id': arme.id}) }}">edit</li>
+                        </ul>
+                    {% else %}
+                        <ul>
+                            <li colspan="3">no records found</li>
+                        </ul>
+                    {% endfor %}
+                    </ul>
+                </td>
+
                 <td>
                     <a href="{{ path('tireur_show', {'id': tireur.id}) }}">show</a>
                     <a href="{{ path('tireur_edit', {'id': tireur.id}) }}">edit</a>

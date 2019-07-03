@@ -5,12 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MembreRepository")
  */
-class Membre
+class Membre implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -42,7 +44,7 @@ class Membre
     /**
      * @ORM\Column(type="boolean")
      */
-    private $idAdmin;
+    private $isAdmin;
 
     /**
      * @Assert\Email
@@ -58,6 +60,28 @@ class Membre
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    /**
+     * @Assert\Type("string")
+     * @Assert\Length(min="3", max="255")
+     */
+    private $rawPassword;
+
+    /**
+     * @return mixed
+     */
+    public function getRawPassword()
+    {
+        return $this->rawPassword;
+    }
+
+    /**
+     * @param mixed $rawPassword
+     */
+    public function setRawPassword($rawPassword)
+    {
+        $this->rawPassword = $rawPassword;
+    }
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Objectif", mappedBy="attribuePar", orphanRemoval=true)
@@ -136,14 +160,14 @@ class Membre
         return $this;
     }
 
-    public function getIdAdmin()
+    public function getIsAdmin()
     {
-        return $this->idAdmin;
+        return $this->isAdmin;
     }
 
-    public function setIdAdmin(bool $idAdmin)
+    public function setIsAdmin(bool $isAdmin)
     {
-        $this->idAdmin = $idAdmin;
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }
@@ -165,11 +189,9 @@ class Membre
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
     }
 
     /**
@@ -263,6 +285,74 @@ class Membre
         }
 
         return $this;
+    }
+
+    /**
+     * @Assert\Callback()
+     */
+    public function assertIsValid(ExecutionContextInterface $context){
+
+        if(null === $this->getId() && null === $this->getRawPassword()){
+            $context
+                ->buildViolation('Vous devez définir un mot de passe')
+                ->atPath('rawPassword')
+                ->addViolation();
+        }
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return [
+            $this->isAdmin ? 'ROLE_ADMIN' : 'ROLE_USER',
+        ];
+    }
+
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        $this->rawPassword = null;
     }
 
 }
