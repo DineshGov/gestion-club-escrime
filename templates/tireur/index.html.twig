@@ -21,7 +21,14 @@
                 <td>{{ tireur.id }}</td>
                 <td>{{ tireur.blason }}</td>
                 <td>{{ tireur.niveauSurclassement }}</td>
-                <td>{{ tireur.arme }}</td>
+                <td>
+                    {% for arme in tireur.armes %}
+
+                            <ul>
+                                <li>{{ arme.nom}}</li>
+                            </ul>
+                    {% endfor %}
+                </td>
                 <td>
                     <a href="{{ path('tireur_show', {'id': tireur.id}) }}">show</a>
                     <a href="{{ path('tireur_edit', {'id': tireur.id}) }}">edit</a>

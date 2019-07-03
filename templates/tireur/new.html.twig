@@ -3,9 +3,10 @@
 {% block title %}New Tireur{% endblock %}
 
 {% block body %}
-    <h1>Create new Tireur</h1>
+    <a style="margin-top: 2%;margin-bottom: 1%" class="btn btn-info" href="{{ path('tireur_index') }}">Retour</a>
+    <h1 style="text-align: center;margin-bottom: 2%;margin-top: 2%">Formulaire ajout tireur</h1>
 
     {{ include('tireur/_form.html.twig') }}
 
-    <a href="{{ path('tireur_index') }}">back to list</a>
+
 {% endblock %}
