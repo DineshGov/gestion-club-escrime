@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CommentaireLecon{% endblock %}
+
+{% block body %}
+    <h1>Edit CommentaireLecon</h1>
+
+    {{ include('commentaire_lecon/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('commentaire_lecon_index') }}">back to list</a>
+
+    {{ include('commentaire_lecon/_delete_form.html.twig') }}
+{% endblock %}

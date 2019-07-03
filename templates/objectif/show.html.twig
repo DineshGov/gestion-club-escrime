@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Objectif{% endblock %}
+
+{% block body %}
+    <h1>Objectif</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ objectif.id }}</td>
+            </tr>
+            <tr>
+                <th>Objectif</th>
+                <td>{{ objectif.objectif }}</td>
+            </tr>
+            <tr>
+                <th>Atteint</th>
+                <td>{{ objectif.atteint ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('objectif_index') }}">back to list</a>
+
+    <a href="{{ path('objectif_edit', {'id': objectif.id}) }}">edit</a>
+
+    {{ include('objectif/_delete_form.html.twig') }}
+{% endblock %}

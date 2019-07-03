@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CommentaireLecon{% endblock %}
+
+{% block body %}
+    <h1>CommentaireLecon</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commentaire_lecon.id }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ commentaire_lecon.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('commentaire_lecon_index') }}">back to list</a>
+
+    <a href="{{ path('commentaire_lecon_edit', {'id': commentaire_lecon.id}) }}">edit</a>
+
+    {{ include('commentaire_lecon/_delete_form.html.twig') }}
+{% endblock %}

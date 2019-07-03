@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CommentaireLecon index{% endblock %}
+
+{% block body %}
+    <h1>CommentaireLecon index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Commentaire</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commentaire_lecon in commentaire_lecons %}
+            <tr>
+                <td>{{ commentaire_lecon.id }}</td>
+                <td>{{ commentaire_lecon.commentaire }}</td>
+                <td>
+                    <a href="{{ path('commentaire_lecon_show', {'id': commentaire_lecon.id}) }}">show</a>
+                    <a href="{{ path('commentaire_lecon_edit', {'id': commentaire_lecon.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('commentaire_lecon_new') }}">Create new</a>
+{% endblock %}

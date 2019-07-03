@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Objectif index{% endblock %}
+
+{% block body %}
+    <h1>Objectif index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Objectif</th>
+                <th>Atteint</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for objectif in objectifs %}
+            <tr>
+                <td>{{ objectif.id }}</td>
+                <td>{{ objectif.objectif }}</td>
+                <td>{{ objectif.atteint ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('objectif_show', {'id': objectif.id}) }}">show</a>
+                    <a href="{{ path('objectif_edit', {'id': objectif.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('objectif_new') }}">Create new</a>
+{% endblock %}
