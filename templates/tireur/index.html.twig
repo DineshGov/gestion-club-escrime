@@ -1,16 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tireur index{% endblock %}
+{% block title %}Tireurs{% endblock %}
 
 {% block body %}
-    <h1>Tireur index</h1>
-
+    <h1 style="text-align: center; margin-bottom: 2%;margin-top: 2%">Liste Tireurs</h1>
+    <a style="float: right;margin-bottom: 2%" class="btn btn-lg btn-primary" href="{{ path('tireur_new') }}">Ajouter</a>
     <table class="table">
+
         <thead>
             <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Date de naissance</th>
                 <th>Id</th>
+                <th>Niveau</th>
                 <th>Blason</th>
-                <th>NiveauSurclassement</th>
+                <th>Groupe</th>
+                <th>Surclassement</th>
                 <th>Arme</th>
                 <th>actions</th>
             </tr>
@@ -18,7 +24,12 @@
         <tbody>
         {% for tireur in tireurs %}
             <tr>
+                <td>{{ tireur.membre.nom }}</td>
+                <td>{{ tireur.membre.prenom }}</td>
+                <td>{{ tireur.membre.dateDeNaissance|date('Y-m-d') }}</td>
                 <td>{{ tireur.id }}</td>
+                <td>{{ tireur.niveau.categorie }}</td>
+                <td>{{ tireur.groupe }}</td>
                 <td>{{ tireur.blason }}</td>
                 <td>{{ tireur.niveauSurclassement }}</td>
                 <td>
@@ -30,8 +41,10 @@
                     {% endfor %}
                 </td>
                 <td>
-                    <a href="{{ path('tireur_show', {'id': tireur.id}) }}">show</a>
-                    <a href="{{ path('tireur_edit', {'id': tireur.id}) }}">edit</a>
+                    <a class="btn  btn-success" href="{{ path('tireur_show', {'id': tireur.id}) }}">Voir</a>
+                    <a class=" btn btn-warning" href="{{ path('tireur_edit', {'id': tireur.id}) }}">Modifier</a>
+                    <a>{{ include('tireur/_delete_form.html.twig') }}</a>
+
                 </td>
             </tr>
         {% else %}
@@ -42,5 +55,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('tireur_new') }}">Create new</a>
+
 {% endblock %}

@@ -3,32 +3,64 @@
 {% block title %}Tireur{% endblock %}
 
 {% block body %}
-    <h1>Tireur</h1>
+    <h1 style="text-align: center">Tireur</h1>
+
+    <a class="btn btn-lg btn-info" style="margin-bottom: 2%" href="{{ path('tireur_index') }}">Retour</a>
 
     <table class="table">
         <tbody>
             <tr>
+                <th>Nom</th>
+                <td>{{ tireur.membre.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ tireur.membre.prenom }}</td>
+            </tr>
+
+            <tr>
+                <th>Date de naissance</th>
+                <td>{{ tireur.membre.dateDeNaissance |date('Y-m-d')}}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ tireur.membre.sexe }}</td>
+            </tr>
+            <tr>
                 <th>Id</th>
                 <td>{{ tireur.id }}</td>
+            </tr>
+
+            <tr>
+                <th>Niveau</th>
+                <td>{{ tireur.niveau.categorie}}</td>
+            </tr>
+            <tr>
+                <th>Groupe</th>
+                <td>{{ tireur.groupe}}</td>
             </tr>
             <tr>
                 <th>Blason</th>
                 <td>{{ tireur.blason }}</td>
             </tr>
+
             <tr>
                 <th>NiveauSurclassement</th>
                 <td>{{ tireur.niveauSurclassement }}</td>
             </tr>
+
             <tr>
-                <th>Arme</th>
-                <td>{{ tireur.arme }}</td>
+                {% for arme in tireur.armes  %}
+                    <th>Arme</th>
+                    <td>{{ arme.nom }}</td>
+                {% endfor %}
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('tireur_index') }}">back to list</a>
 
-    <a href="{{ path('tireur_edit', {'id': tireur.id}) }}">edit</a>
 
-    {{ include('tireur/_delete_form.html.twig') }}
+    {#<a href="{{ path('tireur_edit', {'id': tireur.id}) }}">edit</a>#}
+
+    {#{{ include('tireur/_delete_form.html.twig') }}#}
 {% endblock %}
