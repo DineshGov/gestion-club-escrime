@@ -1,0 +1,15 @@
+{%  block body %}
+    <div class="container" >
+        {{ form_start(form) }}
+        <div class="offset-3 col-sm-6">
+        {{ form_label(form.nom) }}
+        {{ form_widget(form.nom) }}
+        {{ form_errors(form.nom) }}
+            <a href="{{ path('arme_index') }}" class="btn btn-lg btn-info col-sm-3">Retour</a>
+            <button class="btn btn-lg btn-success offset-5 col-sm-3" style="margin-bottom: 2%;margin-top: 2%;">{{ button_label|default('Ajouter') }}</button>
+        </div>
+
+    {{ form_end(form) }}
+    </div>
+
+{%  endblock %}
