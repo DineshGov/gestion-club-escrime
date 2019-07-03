@@ -17,7 +17,10 @@ class TireurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('membre', MembreType::class)
+            ->add('membre', MembreType::class,[
+                'label' => ' '
+
+            ])
             ->add('blason')
             ->add('niveauSurclassement')
             ->add('niveau', EntityType::class, [
@@ -27,6 +30,16 @@ class TireurType extends AbstractType
                 'label' => 'Niveau',
                 'multiple' => false,
                 'expanded' => false,
+            ])
+            ->add('armes',EntityType::class,[
+
+                'required' => true,
+                'class' => Arme::class,
+                'choice_label' => 'nom',
+                'label' => 'Arme',
+                'multiple' => true,
+                'expanded' => false,
+
             ])
             ->add('groupe', EntityType::class, [
                 'required' => true,
