@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Arme;
 use App\Entity\Groupe;
 use App\Entity\Membre;
 use App\Entity\Niveau;
@@ -34,7 +35,16 @@ class TireurType extends AbstractType
                 'label' => 'Groupe',
                 'multiple' => false,
                 'expanded' => false,
-            ]);
+            ])
+            ->add('arme', EntityType::class, [
+                'required' => true,
+                'class' => Arme::class,
+                'choice_label' => 'nom',
+                'label' => 'nom',
+                'multiple' => false,
+                'expanded' => false,
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
