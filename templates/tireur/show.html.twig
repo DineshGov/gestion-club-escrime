@@ -89,6 +89,19 @@
         </tr>
 
         <tr>
+            <th>Lecons suivies:</th>
+            <td>
+                <ul>
+                    {% for lecon in tireur.lecons %}
+                        <li>{{ lecon.entrainement.date|date('Y-m-d') }} par {{ lecon.entraineur.membre.nom }}</li>
+                    {% else %}
+                        <li>Pas de leçon</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
             <td>
                 <a class="btn btn-lg btn-success" href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}">Voir les entrainements</a>
             </td>

@@ -17,7 +17,7 @@
         </div>
 
         <div class="list-group col-4 offset-1" style="margin-top: 2%">
-            <a href="{{ path('entrainement_index') }}" class="list-group-item list-group-item-action">Voir la liste des entrainements</a>
+            <a href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}" class="list-group-item list-group-item-action">Voir la liste des entrainements</a>
         </div>
     </div>
 

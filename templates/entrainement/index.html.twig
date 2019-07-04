@@ -27,7 +27,7 @@
                     <td>
                         <a href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
                         <a href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
-                        <a href="{{ path('validate_presence', {'id': entrainement.presence.id, 'idTireur': tireur.id}) }}">Show feuille</a>
+                        <a href="{{ path('validate_presence', {'id': entrainement.presence.id, 'idTireur': tireur.id}) }}">Valider présence</a>
                     </td>
                     <td>
                         {% for presence in tireur.presences %}
