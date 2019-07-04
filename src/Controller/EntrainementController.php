@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Entrainement;
+use App\Entity\Presence;
+use App\Entity\Tireur;
 use App\Form\EntrainementType;
 use App\Repository\EntrainementRepository;
+use function dump;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +23,18 @@ class EntrainementController extends AbstractController
      */
     public function index(EntrainementRepository $entrainementRepository): Response
     {
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+        foreach ($tireurRepository as $tireur){
+            if($tireur->getMembre()->getId() == $idMembreConnecte){
+                return $this->render('entrainement/index.html.twig', [
+                    'tireur' => $tireur,
+                    'entrainements' => $entrainementRepository->findAll(),
+                ]);
+            }
+        }
+
         return $this->render('entrainement/index.html.twig', [
             'entrainements' => $entrainementRepository->findAll(),
         ]);
@@ -33,10 +48,20 @@ class EntrainementController extends AbstractController
         $entrainement = new Entrainement();
         $form = $this->createForm(EntrainementType::class, $entrainement);
         $form->handleRequest($request);
-
+        $entityManager = $this->getDoctrine()->getManager();
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $presence = new Presence();
+            $entrainement->setPresence($presence);
             $entityManager->persist($entrainement);
+
+            $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+            foreach ($tireurRepository as $tireur){
+                if($tireur->getGroupe()->getId() == $entrainement->getGroupe()->getId()){
+                    $tireur->addEntrainement($entrainement);
+                    $entityManager->persist($tireur);
+                }
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('entrainement_index');

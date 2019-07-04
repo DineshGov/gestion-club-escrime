@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/arbitre")
@@ -28,14 +29,23 @@ class ArbitreController extends AbstractController
     /**
      * @Route("/new", name="arbitre_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $arbitre = new Arbitre();
         $form = $this->createForm(ArbitreType::class, $arbitre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = $passwordEncoder->encodePassword($arbitre->getMembre(), $arbitre->getMembre()->getRawPassword());
+            //$password = $passwordEncoder->encodePassword($membre, $membre->getPassword());
+            $arbitre->getMembre()->setPassword($password);
+            $arbitre->getMembre()->addRole("ROLE_ARBITRE");
+            // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($arbitre->getMembre());
+            $entityManager->flush();
+
+
             $entityManager->persist($arbitre);
             $entityManager->flush();
 

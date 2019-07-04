@@ -9,52 +9,78 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Nom</th>
-                <td>{{ tireur.membre.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ tireur.membre.prenom }}</td>
-            </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ tireur.membre.nom }}</td>
+        </tr>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ tireur.membre.prenom }}</td>
+        </tr>
 
-            <tr>
-                <th>Date de naissance</th>
-                <td>{{ tireur.membre.dateDeNaissance |date('Y-m-d')}}</td>
-            </tr>
-            <tr>
-                <th>Sexe</th>
-                <td>{{ tireur.membre.sexe }}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ tireur.id }}</td>
-            </tr>
+        <tr>
+            <th>Date de naissance</th>
+            <td>{{ tireur.membre.dateDeNaissance |date('Y-m-d')}}</td>
+        </tr>
+        <tr>
+            <th>Sexe</th>
+            <td>{{ tireur.membre.sexe }}</td>
+        </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ tireur.id }}</td>
+        </tr>
 
-            <tr>
-                <th>Niveau</th>
-                <td>{{ tireur.niveau.categorie}}</td>
-            </tr>
-            <tr>
-                <th>Groupe</th>
-                <td>{{ tireur.groupe}}</td>
-            </tr>
-            <tr>
-                <th>Blason</th>
-                <td>{{ tireur.blason }}</td>
-            </tr>
+        <tr>
+            <th>Niveau</th>
+            <td>{{ tireur.niveau.categorie}}</td>
+        </tr>
+        <tr>
+            <th>Groupe</th>
+            <td>{{ tireur.groupe.nom}}</td>
+        </tr>
+        <tr>
+            <th>Blason</th>
+            <td>{{ tireur.blason }}</td>
+        </tr>
 
-            <tr>
-                <th>NiveauSurclassement</th>
-                <td>{{ tireur.niveauSurclassement }}</td>
-            </tr>
+        <tr>
+            <th>NiveauSurclassement</th>
+            <td>{{ tireur.niveauSurclassement }}</td>
+        </tr>
 
-            <tr>
-                {% for arme in tireur.armes  %}
-                    <th>Arme</th>
-                    <td>{{ arme.nom }}</td>
-                {% endfor %}
-            </tr>
+        <tr>
+            <th>Arme</th>
+                <td>
+                    <ul>
+                        {% for arme in tireur.armes %}
+                            <li>{{ arme.nom }}</li>
+                        {% else %}
+                            <li>Pas d'arme</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+        </tr>
+
+        <tr>
+            <th>Présent aux entrainements:</th>
+            <td>
+                <ul>
+                    {% for presence in tireur.presences %}
+                        <li>{{ presence.entrainement.date|date('Y-m-d') }}</li>
+                    {% else %}
+                        <li>Pas d'entrainement</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <a class="btn btn-lg btn-success" href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}">Voir les entrainements</a>
+            </td>
+        </tr>
+
         </tbody>
     </table>
 

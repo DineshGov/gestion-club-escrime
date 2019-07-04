@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Presence;
+use App\Entity\Tireur;
 use App\Form\PresenceType;
 use App\Repository\PresenceRepository;
+use function dump;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,6 +32,8 @@ class PresenceController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
         $presence = new Presence();
         $form = $this->createForm(PresenceType::class, $presence);
         $form->handleRequest($request);
@@ -93,4 +97,27 @@ class PresenceController extends AbstractController
 
         return $this->redirectToRoute('presence_index');
     }
+
+    /**
+     * @Route("/{id}/validatePresence/{idTireur}", name="validate_presence")
+     */
+    public function validatePresence(Request $request, Presence $presence){
+
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+        $personne = null;
+        $entityManager = $this->getDoctrine()->getManager();
+        foreach ($tireurRepository as $tireur){
+            if($tireur->getMembre()->getId() == $idMembreConnecte){
+                $entityManager->persist($tireur->addPresence($presence));
+                $personne = $tireur;
+            }
+        }
+
+        $entityManager->flush();
+        return $this->redirectToRoute('tireur_show', [
+            'id' => $personne->getId(),
+        ]);
+    }
+
 }

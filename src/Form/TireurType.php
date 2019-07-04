@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Form;
-
 use App\Entity\Arme;
 use App\Entity\Groupe;
 use App\Entity\Membre;
@@ -11,7 +9,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 class TireurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -19,7 +16,6 @@ class TireurType extends AbstractType
         $builder
             ->add('membre', MembreType::class,[
                 'label' => ' '
-
             ])
             ->add('blason')
             ->add('niveauSurclassement')
@@ -32,14 +28,12 @@ class TireurType extends AbstractType
                 'expanded' => false,
             ])
             ->add('armes',EntityType::class,[
-
                 'required' => true,
                 'class' => Arme::class,
                 'choice_label' => 'nom',
                 'label' => 'Arme',
                 'multiple' => true,
                 'expanded' => false,
-
             ])
             ->add('groupe', EntityType::class, [
                 'required' => true,
@@ -50,7 +44,6 @@ class TireurType extends AbstractType
                 'expanded' => false,
             ]);
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

@@ -5,10 +5,10 @@ namespace App\Form;
 use App\Entity\Entrainement;
 use App\Entity\Groupe;
 use App\Entity\MaitreArme;
+use App\Entity\Membre;
 use App\Entity\Tireur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,20 +26,12 @@ class EntrainementType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
             ])
-            ->add('tireurs', EntityType::class, [
-                'required' => true,
-                'class' => Tireur::class,
-                'choice_label' => 'nom',
-                'label' => 'tireur',
-                'multiple' => true,
-                'expanded' => false,
-            ])
             ->add('entraineurs', EntityType::class, [
                 'required' => true,
                 'class' => MaitreArme::class,
                 'choice_label' => 'membre',
                 'label' => 'maitre d\'arme',
-                'multiple' => false,
+                'multiple' => true,
                 'expanded' => false,
             ])
         ;

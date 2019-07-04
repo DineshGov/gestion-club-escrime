@@ -8,18 +8,18 @@
     <table class="table">
 
         <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Date de naissance</th>
-                <th>Id</th>
-                <th>Niveau</th>
-                <th>Blason</th>
-                <th>Groupe</th>
-                <th>Surclassement</th>
-                <th>Arme</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Date de naissance</th>
+            <th>Id</th>
+            <th>Niveau</th>
+            <th>Blason</th>
+            <th>Groupe</th>
+            <th>Surclassement</th>
+            <th>Arme</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for tireur in tireurs %}
@@ -29,29 +29,29 @@
                 <td>{{ tireur.membre.dateDeNaissance|date('Y-m-d') }}</td>
                 <td>{{ tireur.id }}</td>
                 <td>{{ tireur.niveau.categorie }}</td>
-                <td>{{ tireur.groupe }}</td>
                 <td>{{ tireur.blason }}</td>
+                <td>{{ tireur.groupe }}</td>
                 <td>{{ tireur.niveauSurclassement }}</td>
                 <td>
                     {% for arme in tireur.armes %}
 
-                            <ul>
-                                <li>{{ arme.nom}}</li>
-                            </ul>
+                        <ul>
+                            <li>{{ arme.nom}}</li>
+                        </ul>
                     {% endfor %}
                 </td>
                 <td>
-                    <a class="btn  btn-success" href="{{ path('tireur_show', {'id': tireur.id}) }}">Voir</a>
-                    <a class=" btn btn-warning" href="{{ path('tireur_edit', {'id': tireur.id}) }}">Modifier</a>
+                    <a class="btn btn-success" href="{{ path('tireur_show', {'id': tireur.id}) }}">Voir</a>
+                    <a class="btn btn-warning" href="{{ path('tireur_edit', {'id': tireur.id}) }}">Modifier</a>
                     <a>{{ include('tireur/_delete_form.html.twig') }}</a>
-
-                </td>
             </tr>
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
+
         {% endfor %}
+
         </tbody>
     </table>
 

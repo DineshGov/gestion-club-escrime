@@ -7,14 +7,16 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use IntlDateFormatter;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MembreRepository")
  * @ApiResource
  */
-class Membre
+class Membre implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -46,7 +48,7 @@ class Membre
     /**
      * @ORM\Column(type="boolean")
      */
-    private $idAdmin;
+    private $isAdmin;
 
     /**
      * @Assert\Email
@@ -64,6 +66,12 @@ class Membre
     private $password;
 
     /**
+     * @Assert\Type("string")
+     * @Assert\Length(min="3", max="255")
+     */
+    private $rawPassword;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Objectif", mappedBy="attribuePar", orphanRemoval=true)
      */
     private $objectifsAttribues;
@@ -78,7 +86,10 @@ class Membre
      */
     private $commentaireLecons;
 
-
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
 
     public function __construct()
     {
@@ -140,14 +151,14 @@ class Membre
         return $this;
     }
 
-    public function getIdAdmin()
+    public function getIsAdmin()
     {
-        return $this->idAdmin;
+        return $this->isAdmin;
     }
 
-    public function setIdAdmin(bool $idAdmin)
+    public function setIsAdmin(bool $isAdmin)
     {
-        $this->idAdmin = $idAdmin;
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }
@@ -169,11 +180,25 @@ class Membre
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword($password)
     {
         $this->password = $password;
+    }
 
-        return $this;
+    /**
+     * @return mixed
+     */
+    public function getRawPassword()
+    {
+        return $this->rawPassword;
+    }
+
+    /**
+     * @param mixed $rawPassword
+     */
+    public function setRawPassword($rawPassword)
+    {
+        $this->rawPassword = $rawPassword;
     }
 
     /**
@@ -269,9 +294,81 @@ class Membre
         return $this;
     }
 
+    /**
+     * @Assert\Callback()
+     */
+    public function assertIsValid(ExecutionContextInterface $context){
+
+        if(null === $this->getId() && null === $this->getRawPassword()){
+            $context
+                ->buildViolation('Vous devez définir un mot de passe')
+                ->atPath('rawPassword')
+                ->addViolation();
+        }
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles() {
+        if (empty($this->roles)) {
+            return ['ROLE_ADMIN'];
+        }
+        return $this->roles;
+    }
+
+    function addRole($role) {
+        $this->roles[] = $role;
+    }
+
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        $this->rawPassword = null;
+    }
+
+    // TODO: Implement __toString() method.
     public function __toString()
     {
-        // TODO: Implement __toString() method.
         return $this->nom;
     }
 
@@ -279,9 +376,9 @@ class Membre
         $dateActuelle=new \DateTime();
         $format = 'Y-m-!d H:i:s';
         $dateActuelle->format('Y');
-       // $intl_date_formatter = new IntlDateFormatter('fr_FR',
-         //   IntlDateFormatter::SHORT,
-           // IntlDateFormatter::MEDIUM);
+        // $intl_date_formatter = new IntlDateFormatter('fr_FR',
+        //   IntlDateFormatter::SHORT,
+        // IntlDateFormatter::MEDIUM);
         //$dateActuelle=$intl_date_formatter->format($dateActuelle);
         //var_dump($dateActuelle);
         //var_dump($this->dateDeNaissance);
@@ -290,5 +387,4 @@ class Membre
         $age=strval($age->y);
         return $this->nom.' '.$this->prenom .' Age : '.$age;
     }
-
 }

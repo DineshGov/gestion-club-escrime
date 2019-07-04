@@ -36,9 +36,8 @@
             </div>
 
             <div class="col-sm-4">
-                {{ form_label(form.membre.password) }}
-                {{ form_widget(form.membre.password) }}
-                {{ form_errors(form.membre.password) }}
+                {{ form_widget(form.membre.rawPassword) }}
+                {{ form_errors(form.membre.rawPassword) }}
             </div>
         </div>
 
@@ -46,9 +45,9 @@
         <div class="row">
 
             <div class="col-sm-4" style="margin-top: 3%">
-                {{ form_label(form.membre.idAdmin) }}
-                {{ form_widget(form.membre.idAdmin) }}
-                {{ form_errors(form.membre.idAdmin) }}
+                {{ form_label(form.membre.isAdmin) }}
+                {{ form_widget(form.membre.isAdmin) }}
+                {{ form_errors(form.membre.isAdmin) }}
             </div>
 
             <div class="col-sm-4">
