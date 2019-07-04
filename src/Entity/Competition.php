@@ -34,12 +34,12 @@ class Competition
     private $ville;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tireur", inversedBy="competitions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tireur", inversedBy="competitions",cascade={"persist"})
      */
     private $tireurs;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Niveau", inversedBy="competitions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Niveau", inversedBy="competitions",cascade={"persist"})
      */
     private $niveau;
 
@@ -58,6 +58,11 @@ class Competition
     public function getId(): ?int
     {
         return $this->id;
+    }
+    public function setId($id){
+
+        $this->id=$id;
+
     }
 
     public function getNom(): ?string
@@ -113,6 +118,10 @@ class Competition
         return $this;
     }
 
+    public function setTireurs(Collection $collection){
+        $this->tireurs=$collection;
+    }
+
     public function removeTireur(Tireur $tireur): self
     {
         if ($this->tireurs->contains($tireur)) {
@@ -128,6 +137,12 @@ class Competition
     public function getNiveau(): Collection
     {
         return $this->niveau;
+    }
+
+    public function setNiveau(Collection $niveaux){
+
+        $this->niveau=$niveaux;
+
     }
 
     public function addNiveau(Niveau $niveau): self
@@ -173,4 +188,5 @@ class Competition
 
         return $this;
     }
+
 }
