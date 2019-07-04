@@ -22,8 +22,8 @@
                     <td>{{ entrainement.date ? entrainement.date|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ entrainement.groupe }}</td>
                     <td>
-                        <a href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
-                        <a href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
+                        <a class="btn btn-primary" href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
+                        <a class="btn btn-info" href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -34,8 +34,8 @@
                     <td>{{ entrainement.date ? entrainement.date|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ entrainement.groupe }}</td>
                     <td>
-                        <a href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
-                        <a href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
+                        <a class="btn btn-primary" href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
+                        <a class="btn btn-info" href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -48,5 +48,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('entrainement_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('entrainement_new') }}">Create new</a>
 {% endblock %}

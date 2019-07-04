@@ -17,8 +17,8 @@
             <tr>
                 <td>{{ maitre_arme.id }}</td>
                 <td>
-                    <a href="{{ path('maitre_arme_show', {'id': maitre_arme.id}) }}">show</a>
-                    <a href="{{ path('maitre_arme_edit', {'id': maitre_arme.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('maitre_arme_show', {'id': maitre_arme.id}) }}">show</a>
+                    <a class="btn btn-info" href="{{ path('maitre_arme_edit', {'id': maitre_arme.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -29,5 +29,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('maitre_arme_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('maitre_arme_new') }}">Create new</a>
 {% endblock %}

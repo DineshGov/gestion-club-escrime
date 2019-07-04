@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit MaitreArme</h1>
 
-    {{ include('maitre_arme/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('maitre_arme/_form.html.twig', {'button_label': 'Update'}) }}<br>
 
-    <a href="{{ path('maitre_arme_index') }}">back to list</a>
+    <a class="btn btn-info" href="{{ path('maitre_arme_index') }}">back to list</a>
 
     {{ include('maitre_arme/_delete_form.html.twig') }}
 {% endblock %}
