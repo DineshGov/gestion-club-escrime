@@ -1,0 +1,25 @@
+{% extends 'tireur/base.html.twig' %}
+
+{%  block title %}Accueil{% endblock %}
+
+{%  block body %}
+
+    <div class="container" style="margin-top: 2%">
+        <h2>Dashboard tireur</h2>
+        <div class="list-group col-4 offset-1" style="margin-top: 2%">
+            <a href="{{ path('tireur_show', {id: 2}) }}" class="list-group-item list-group-item-action">Voir mes informations</a>
+            <a href="{{ path('maitre_arme_index') }}" class="list-group-item list-group-item-action">Voir la liste des maitres d'arme</a>
+            <a href="{{ path('arbitre_index') }}" class="list-group-item list-group-item-action">Voir la liste des arbitres</a>
+        </div>
+
+        <div class="list-group col-4 offset-1" style="margin-top: 2%">
+            <a href="{{ path('competition_index') }}" class="list-group-item list-group-item-action">Voir la liste des compétitions</a>
+        </div>
+
+        <div class="list-group col-4 offset-1" style="margin-top: 2%">
+            <a href="{{ path('entrainement_index') }}" class="list-group-item list-group-item-action">Voir la liste des entrainements</a>
+        </div>
+    </div>
+
+{%  endblock %}
+

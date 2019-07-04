@@ -6,17 +6,28 @@ use App\Entity\Membre;
 use App\Entity\Tireur;
 use App\Form\TireurType;
 use App\Repository\TireurRepository;
+use function dump;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use function var_dump;
 
 /**
  * @Route("/tireur")
  */
 class TireurController extends AbstractController
 {
+
+    /**
+     * @Route("/home", name="tireur_home")
+     */
+    public function home()
+    {
+        return $this->render("tireur/home.html.twig");
+    }
+
     /**
      * @Route("/", name="tireur_index", methods={"GET"})
      */
@@ -105,4 +116,18 @@ class TireurController extends AbstractController
 
         return $this->redirectToRoute('tireur_index');
     }
+
+    public function redirectToShowTireur(){
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+        foreach ($tireurRepository as $tireur){
+            if($tireur->getMembre()->getId() == $idMembreConnecte){
+                return $this->render('tireur/show.html.twig', [
+                    'tireur' => $tireur,
+                ]);
+            }
+        }
+    }
+
 }
