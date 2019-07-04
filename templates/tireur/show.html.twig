@@ -21,7 +21,15 @@
             </tr>
             <tr>
                 <th>Arme</th>
-                <td>{{ tireur.armes }}</td>
+                <td>
+                    <ul>
+                        {% for arme in tireur.armes %}
+                            <li>{{ arme.nom }}</li>
+                        {% else %}
+                            <li>Pas d'arme</li>
+                        {% endfor %}
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>

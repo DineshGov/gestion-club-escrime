@@ -73,53 +73,6 @@
                     Connexion
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('logout') }}">
-                    <span class="oi oi-account-login"></span>
-                    Deconnexion
-                </a>
-            </li>
-
-            <li class="nav-item" style="">
-                <a class="nav-link " href="{{ path('groupe_index') }}">
-                    <span class="oi oi-account-logout"></span>
-                    Groupe</a>
-            </li>
-
-            <li class="nav-item" style="">
-                <a class="nav-link " href="{{ path('arbitre_index') }}">
-                    <span class="oi oi-account-logout"></span>
-                    Arbitre</a>
-            </li>
-
-
-
-
-  {#          {% if is_granted('ROLE_ADMIN') %}#}
-
-
-            {#{% endif %}#}
-
-          {#  {% if is_granted('ROLE_USER') %}
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Espace Client
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{ path('app_commande_index') }}">
-                            <span class="oi oi-command"></span>
-                            Commandes
-                        </a>
-                    </div>
-                </li>
-
-                #}{#<li class="nav-item">
-                    <a class="nav-link " href="">Commandes</a>
-                </li>#}{#
-            {% endif %}#}
-
 
         </ul>
     </nav>

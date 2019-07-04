@@ -1,0 +1,41 @@
+{% set currentRoute = app.request.get('_route') %}
+<div class="container" style="padding-top: 1%">
+
+    <div class="text-center" style="padding-bottom: 1%">
+
+        <img src="{{ asset('images/logo.jpg') }}" alt="Logo Escrime" style="height:80px">
+        {# <img src="{{ asset('images/football.png') }}" alt="Logo" style="height:100px">
+         <img src="{{ asset('images/basketball.jpg') }}" alt="Logo" style="height:100px">#}
+        {#<img src="{{ asset('images/basket.png') }}" alt="Logo Hitema" style="height:50px"> #}
+
+
+    </div>
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{path('admin_home')}}">
+            <span class="oi oi-home"></span>
+            Escrime
+        </a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown" style="margin-right: 30px">
+                <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Compétitions
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('niveau_new') }}">Ajouter un niveau</a>
+                    <a class="dropdown-item" href="{{ path('niveau_index') }}">Liste niveaux</a>
+                </div>
+            </li>
+            {#{% endif %}#}
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('logout') }}">
+                    <span class="oi oi-account-login"></span>
+                    Deconnexion
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
