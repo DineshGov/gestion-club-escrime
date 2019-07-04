@@ -26,20 +26,12 @@ class EntrainementType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
             ])
-            ->add('tireurs', EntityType::class, [
-                'required' => true,
-                'class' => Tireur::class,
-                'choice_label' => 'membre',
-                'label' => 'tireur',
-                'multiple' => true,
-                'expanded' => false,
-            ])
             ->add('entraineurs', EntityType::class, [
                 'required' => true,
                 'class' => MaitreArme::class,
                 'choice_label' => 'membre',
                 'label' => 'maitre d\'arme',
-                'multiple' => true,
+                'multiple' => false,
                 'expanded' => false,
             ])
         ;

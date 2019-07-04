@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6512909b-483e-499b-9397-2ef1ff376906" name="Default Changelist" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/homepage/index.html.twig" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/_nav.html.twig" afterPath="$PROJECT_DIR$/templates/_nav.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Entrainement.php" afterPath="$PROJECT_DIR$/src/Entity/Entrainement.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Objectif.php" afterPath="$PROJECT_DIR$/src/Entity/Objectif.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Tireur.php" afterPath="$PROJECT_DIR$/src/Entity/Tireur.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/EntrainementType.php" afterPath="$PROJECT_DIR$/src/Form/EntrainementType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/LeconType.php" afterPath="$PROJECT_DIR$/src/Form/LeconType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/ObjectifType.php" afterPath="$PROJECT_DIR$/src/Form/ObjectifType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Form/PresenceType.php" afterPath="$PROJECT_DIR$/src/Form/PresenceType.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tireur/index.html.twig" afterPath="$PROJECT_DIR$/templates/tireur/index.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/tireur/show.html.twig" afterPath="$PROJECT_DIR$/templates/tireur/show.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -69,9 +74,14 @@
       <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/tireur/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
-              <folding />
+            <state relative-caret-position="417">
+              <caret line="63" column="13" lean-forward="true" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+              <folding>
+                <element signature="e#13#27#0#Twig" expanded="true" />
+                <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+                <element signature="e#213#225#0#Twig" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -473,12 +483,12 @@
       <option name="presentableId" value="Default" />
       <updated>1562097542645</updated>
       <workItem from="1562097544469" duration="928000" />
-      <workItem from="1562098667117" duration="33675000" />
+      <workItem from="1562098667117" duration="33860000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34603000" />
+    <option name="totallyTimeSpent" value="34788000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="720" extended-state="0" />
@@ -998,9 +1008,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/tireur/show.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="21" lean-forward="false" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="417">
+          <caret line="63" column="13" lean-forward="true" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+          <folding>
+            <element signature="e#13#27#0#Twig" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="e#213#225#0#Twig" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
