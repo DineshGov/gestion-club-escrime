@@ -14,9 +14,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('lecon_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('lecon_index') }}">back to list</a>
 
-    <a href="{{ path('lecon_edit', {'id': lecon.id}) }}">edit</a>
+    <a class="btn btn-info" href="{{ path('lecon_edit', {'id': lecon.id}) }}">edit</a>
 
     {{ include('lecon/_delete_form.html.twig') }}
 {% endblock %}
