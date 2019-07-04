@@ -12,7 +12,9 @@
                 <th>Date</th>
                 <th>Groupe</th>
                 <th>actions</th>
-                <th>Présence</th>
+                {%  if app.request.get('groupe')  %}
+                    <th>Présence</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>

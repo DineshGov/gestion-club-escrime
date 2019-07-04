@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Competition;
 use App\Entity\Niveau;
+use App\Entity\Tireur;
 use App\Form\CompetitionType;
 use App\Repository\CompetitionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +22,16 @@ class CompetitionController extends AbstractController
      */
     public function index(CompetitionRepository $competitionRepository): Response
     {
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+        foreach ($tireurRepository as $tireur){
+            if($tireur->getMembre()->getId() == $idMembreConnecte){
+                return $this->render('competition/index.html.twig', [
+                    'tireur' => $tireur,
+                    'competitions' => $competitionRepository->findAll(),
+                ]);
+            }
+        }
         //dump($competitionRepository->findAll());die;
         return $this->render('competition/index.html.twig', [
             'competitions' => $competitionRepository->findAll(),
@@ -150,6 +161,28 @@ class CompetitionController extends AbstractController
     {
         return $this->render('competition/tireurs.html.twig', [
             'tireurs' => $competition->getTireurs(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/participeCompetition/{idTireur}",name="participe_competition",methods={"GET"})
+     */
+    public function participeCompetition(Request $request,Competition $competition):Response {
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+        $personne = null;
+        $entityManager = $this->getDoctrine()->getManager();
+        foreach ($tireurRepository as $tireur){
+            if($tireur->getMembre()->getId() == $idMembreConnecte){
+                $entityManager->persist($tireur->addCompetition($competition));
+                $personne = $tireur;
+            }
+        }
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('tireur_show', [
+            'id' => $personne->getId(),
         ]);
     }
 
