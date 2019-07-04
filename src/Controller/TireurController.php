@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Competition;
 use App\Entity\Tireur;
 use App\Form\TireurType;
 use App\Repository\TireurRepository;
@@ -92,5 +93,18 @@ class TireurController extends AbstractController
         }
 
         return $this->redirectToRoute('tireur_index');
+    }
+
+    /**
+     * @Route("/index/competition",name="competition",methods={"GET"})
+     */
+    public function index_competition(Request $request):Response {
+
+        $competitions =$this->getDoctrine()->getManager()->getRepository('Competition')->findAll();
+        var_dump($competitions);die;
+        return $this->render('tireur/index_competition.html.twig',[
+            'competitions' => $competitions
+
+        ]);
     }
 }

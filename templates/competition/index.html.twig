@@ -13,6 +13,7 @@
                 <th>Nom</th>
                 <th>Date</th>
                 <th>Ville</th>
+                <th>Niveau</th>
                 <th>Tireurs</th>
                 <th>Actions</th>
             </tr>
@@ -24,6 +25,9 @@
                 <td>{{ competition.nom }}</td>
                 <td>{{ competition.date ? competition.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ competition.ville }}</td>
+                {% for niveau in competition.niveau %}
+                    <td>{{ niveau.categorie}}</td>
+                {% endfor %}
                {# {%  for tireur in competition.tireurs %}
                     <td>{{ tireur.membre.nom }}</td>
                 {%  endfor %}#}

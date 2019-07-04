@@ -36,7 +36,7 @@ class Tireur
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Niveau", inversedBy="tireur")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Niveau", inversedBy="tireur",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $niveau;
