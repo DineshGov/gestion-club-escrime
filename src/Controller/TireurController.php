@@ -100,7 +100,7 @@ class TireurController extends AbstractController
      */
     public function index_competition(Request $request):Response {
 
-        $competitions =$this->getDoctrine()->getManager()->getRepository('Competition')->findAll();
+        $competitions =$this->getDoctrine()->getManager()->getRepository(Competition::class)->findAll();
         var_dump($competitions);die;
         return $this->render('tireur/index_competition.html.twig',[
             'competitions' => $competitions
