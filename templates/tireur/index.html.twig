@@ -23,14 +23,14 @@
         </thead>
         <tbody>
         {% for tireur in tireurs %}
-            <td>
+            <tr>
                 <td>{{ tireur.membre.nom }}</td>
                 <td>{{ tireur.membre.prenom }}</td>
                 <td>{{ tireur.membre.dateDeNaissance|date('Y-m-d') }}</td>
                 <td>{{ tireur.id }}</td>
                 <td>{{ tireur.niveau.categorie }}</td>
-                <td>{{ tireur.groupe }}</td>
                 <td>{{ tireur.blason }}</td>
+                <td>{{ tireur.groupe }}</td>
                 <td>{{ tireur.niveauSurclassement }}</td>
                 <td>
                     {% for arme in tireur.armes %}
@@ -44,15 +44,14 @@
                     <a class="btn btn-success" href="{{ path('tireur_show', {'id': tireur.id}) }}">Voir</a>
                     <a class="btn btn-warning" href="{{ path('tireur_edit', {'id': tireur.id}) }}">Modifier</a>
                     <a>{{ include('tireur/_delete_form.html.twig') }}</a>
-
-                </td>
-                <td></td>
             </tr>
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
+
         {% endfor %}
+
         </tbody>
     </table>
 

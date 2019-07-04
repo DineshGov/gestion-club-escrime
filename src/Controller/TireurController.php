@@ -22,6 +22,9 @@ class TireurController extends AbstractController
      */
     public function index(TireurRepository $tireurRepository): Response
     {
+        /*$t = $this->getDoctrine()->getManager()->getRepository(Tireur::class);
+        var_dump($t->findAll()[0]->getMembre());*/
+
         return $this->render('tireur/index.html.twig', [
             'tireurs' => $tireurRepository->findAll(),
         ]);

@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <th>Groupe</th>
-            <td>{{ tireur.groupe}}</td>
+            <td>{{ tireur.groupe.nom}}</td>
         </tr>
         <tr>
             <th>Blason</th>
@@ -57,7 +57,7 @@
         </tr>
         <tr>
             <td>
-                <a class="btn btn-lg btn-success" href="{{ path('entrainement_index', {'groupe': tireur.groupe}) }}">Voir les entrainements</a>
+                <a class="btn btn-lg btn-success" href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}">Voir les entrainements</a>
             </td>
         </tr>
         </tbody>

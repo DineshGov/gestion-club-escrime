@@ -30,7 +30,7 @@ class PresenceController extends AbstractController
      */
     public function new(Request $request): Response
     {
-
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $presence = new Presence();
         $form = $this->createForm(PresenceType::class, $presence);
