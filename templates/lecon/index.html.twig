@@ -17,8 +17,8 @@
             <tr>
                 <td>{{ lecon.id }}</td>
                 <td>
-                    <a href="{{ path('lecon_show', {'id': lecon.id}) }}">show</a>
-                    <a href="{{ path('lecon_edit', {'id': lecon.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('lecon_show', {'id': lecon.id}) }}">show</a>
+                    <a class="btn btn-info" href="{{ path('lecon_edit', {'id': lecon.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
