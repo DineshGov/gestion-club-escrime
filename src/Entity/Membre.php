@@ -365,19 +365,18 @@ class Membre implements UserInterface
     }
 
     // TODO: Implement __toString() method.
-    /*public function __toString()
+    public function __toString()
     {
-
         return $this->nom;
-    }*/
+    }
 
     public function nomPrenom(){
         $dateActuelle=new \DateTime();
         $format = 'Y-m-!d H:i:s';
         $dateActuelle->format('Y');
-       // $intl_date_formatter = new IntlDateFormatter('fr_FR',
-         //   IntlDateFormatter::SHORT,
-           // IntlDateFormatter::MEDIUM);
+        // $intl_date_formatter = new IntlDateFormatter('fr_FR',
+        //   IntlDateFormatter::SHORT,
+        // IntlDateFormatter::MEDIUM);
         //$dateActuelle=$intl_date_formatter->format($dateActuelle);
         //var_dump($dateActuelle);
         //var_dump($this->dateDeNaissance);
@@ -386,5 +385,4 @@ class Membre implements UserInterface
         $age=strval($age->y);
         return $this->nom.' '.$this->prenom .' Age : '.$age;
     }
-
 }

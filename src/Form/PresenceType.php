@@ -28,7 +28,7 @@ class PresenceType extends AbstractType
                 'class' => Tireur::class,
                 'choice_label' => 'membre',
                 'label' => 'Tireurs presents',
-                'multiple' => true,
+                'multiple' => false,
                 'expanded' => false,
             ])
         ;

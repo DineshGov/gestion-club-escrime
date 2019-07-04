@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\CommentaireLecon;
 use App\Entity\Entrainement;
 use App\Entity\Lecon;
 use App\Entity\MaitreArme;

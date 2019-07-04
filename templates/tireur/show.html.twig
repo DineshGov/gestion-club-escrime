@@ -1,4 +1,3 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Tireur{% endblock %}
@@ -38,7 +37,7 @@
         </tr>
         <tr>
             <th>Groupe</th>
-            <td>{{ tireur.groupe}}</td>
+            <td>{{ tireur.groupe.nom}}</td>
         </tr>
         <tr>
             <th>Blason</th>
@@ -62,6 +61,13 @@
                     </ul>
                 </td>
         </tr>
+
+        <tr>
+            <td>
+                <a class="btn btn-lg btn-success" href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}">Voir les entrainements</a>
+            </td>
+        </tr>
+
         </tbody>
     </table>
 

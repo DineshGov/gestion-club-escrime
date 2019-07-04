@@ -14,7 +14,9 @@ class MaitreArmeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('membre', MembreType::class);
+            ->add('membre', MembreType::class,[
+                'label' => ' '
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

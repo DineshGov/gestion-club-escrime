@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Entrainement;
+use App\Entity\Presence;
 use App\Form\EntrainementType;
 use App\Repository\EntrainementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,6 +36,9 @@ class EntrainementController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $presence = new Presence();
+            $entrainement->setPresence($presence);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($entrainement);
             $entityManager->flush();

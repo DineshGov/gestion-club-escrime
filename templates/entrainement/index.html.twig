@@ -10,24 +10,41 @@
             <tr>
                 <th>Id</th>
                 <th>Date</th>
+                <th>Groupe</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for entrainement in entrainements %}
-            <tr>
-                <td>{{ entrainement.id }}</td>
-                <td>{{ entrainement.date ? entrainement.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
-                    <a href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
+        {% if  app.request.get('groupe') %}
+            {% for entrainement in entrainements if app.request.get('groupe') == entrainement.groupe %}
+                <tr>
+                    <td>{{ entrainement.id }}</td>
+                    <td>{{ entrainement.date ? entrainement.date|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ entrainement.groupe }}</td>
+                    <td>
+                        <a href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
+                        <a href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {%  else %}
+            {% for entrainement in entrainements %}
+                <tr>
+                    <td>{{ entrainement.id }}</td>
+                    <td>{{ entrainement.date ? entrainement.date|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ entrainement.groupe }}</td>
+                    <td>
+                        <a href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
+                        <a href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        {% if not entrainements %}
             <tr>
                 <td colspan="3">no records found</td>
             </tr>
-        {% endfor %}
+        {% endif %}
         </tbody>
     </table>
 

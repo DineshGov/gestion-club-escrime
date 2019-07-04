@@ -31,7 +31,7 @@ class EntrainementType extends AbstractType
                 'class' => MaitreArme::class,
                 'choice_label' => 'membre',
                 'label' => 'maitre d\'arme',
-                'multiple' => false,
+                'multiple' => true,
                 'expanded' => false,
             ])
         ;
