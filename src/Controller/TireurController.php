@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Membre;
 use App\Entity\Tireur;
 use App\Form\TireurType;
 use App\Repository\TireurRepository;
@@ -9,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/tireur")
@@ -28,14 +30,24 @@ class TireurController extends AbstractController
     /**
      * @Route("/new", name="tireur_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $tireur = new Tireur();
         $form = $this->createForm(TireurType::class, $tireur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = $passwordEncoder->encodePassword($tireur->getMembre(), $tireur->getMembre()->getRawPassword());
+            //$password = $passwordEncoder->encodePassword($membre, $membre->getPassword());
+            $tireur->getMembre()->setPassword($password);
+            $tireur->getMembre()->addRole("ROLE_TIREUR");
+            // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($tireur->getMembre());
+            $entityManager->flush();
+
+
+            //$entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tireur);
             $entityManager->flush();
 

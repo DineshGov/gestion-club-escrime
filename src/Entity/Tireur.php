@@ -67,6 +67,7 @@ class Tireur
     private $presences;
     public function __construct()
     {
+        $this->membre = new Membre();
         $this->competitions = new ArrayCollection();
         $this->entrainements = new ArrayCollection();
         $this->lecons = new ArrayCollection();

@@ -67,25 +67,30 @@
             </li>
 
 
-                <li class="nav-item">
-                    <a class="nav-link" href="">
-                        <span class="oi oi-account-login"></span>
-                        Connexion
-                    </a>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('login') }}">
+                    <span class="oi oi-account-login"></span>
+                    Connexion
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('logout') }}">
+                    <span class="oi oi-account-login"></span>
+                    Deconnexion
+                </a>
+            </li>
 
-                </li>
+            <li class="nav-item" style="">
+                <a class="nav-link " href="{{ path('groupe_index') }}">
+                    <span class="oi oi-account-logout"></span>
+                    Groupe</a>
+            </li>
 
-                <li class="nav-item" style="">
-                    <a class="nav-link " href="{{ path('groupe_index') }}">
-                        <span class="oi oi-account-logout"></span>
-                        Groupe</a>
-                </li>
-
-                <li class="nav-item" style="">
-                    <a class="nav-link " href="{{ path('arbitre_index') }}">
-                        <span class="oi oi-account-logout"></span>
-                        Arbitre</a>
-                </li>
+            <li class="nav-item" style="">
+                <a class="nav-link " href="{{ path('arbitre_index') }}">
+                    <span class="oi oi-account-logout"></span>
+                    Arbitre</a>
+            </li>
 
 
 

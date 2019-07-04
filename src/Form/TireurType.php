@@ -9,6 +9,7 @@ use App\Entity\Niveau;
 use App\Entity\Tireur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,10 +18,7 @@ class TireurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('membre', MembreType::class,[
-                'label' => ' '
-
-            ])
+            ->add('membre', MembreType::class)
             ->add('blason')
             ->add('niveauSurclassement')
             ->add('niveau', EntityType::class, [
