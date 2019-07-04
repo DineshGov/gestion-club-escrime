@@ -63,6 +63,19 @@
         </tr>
 
         <tr>
+            <th>Présent aux entrainements:</th>
+            <td>
+                <ul>
+                    {% for presence in tireur.presences %}
+                        <li>{{ presence.entrainement.date|date('Y-m-d') }}</li>
+                    {% else %}
+                        <li>Pas d'entrainement</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
             <td>
                 <a class="btn btn-lg btn-success" href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}">Voir les entrainements</a>
             </td>

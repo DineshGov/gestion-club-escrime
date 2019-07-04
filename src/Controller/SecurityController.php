@@ -62,7 +62,7 @@ class SecurityController extends AbstractController
         }
         else if($this->isGranted('ROLE_TIREUR'))
         {
-            return $this->redirectToRoute('tireur_index');
+            return $this->redirectToRoute('tireur_home');
         }
         else if($this->isGranted('ROLE_ARBITRE'))
         {

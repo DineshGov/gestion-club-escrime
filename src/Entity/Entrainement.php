@@ -24,7 +24,7 @@ class Entrainement
      */
     private $groupe;
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tireur", inversedBy="entrainements")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tireur", inversedBy="entrainements", cascade={"persist","remove"})
      */
     private $tireurs;
     /**

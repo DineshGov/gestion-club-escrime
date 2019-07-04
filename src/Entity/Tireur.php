@@ -65,6 +65,8 @@ class Tireur
      * @ORM\ManyToMany(targetEntity="App\Entity\Presence", mappedBy="tireursPresents")
      */
     private $presences;
+
+
     public function __construct()
     {
         $this->membre = new Membre();
@@ -75,6 +77,7 @@ class Tireur
         $this->armes = new ArrayCollection();
         $this->presences = new ArrayCollection();
     }
+
     public function getId(): ?int
     {
         return $this->id;

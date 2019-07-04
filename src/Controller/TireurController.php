@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Entrainement;
 use App\Entity\Membre;
 use App\Entity\Competition;
 use App\Entity\Tireur;
@@ -26,7 +27,18 @@ class TireurController extends AbstractController
      */
     public function home()
     {
-        return $this->render("tireur/home.html.twig");
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+        foreach ($tireurRepository as $tireur) {
+            if ($tireur->getMembre()->getId() == $idMembreConnecte) {
+                return $this->render('tireur/home.html.twig', [
+                    'tireur' => $tireur,
+                ]);
+            }
+
+        }
+        //return $this->render("tireur/home.html.twig");
     }
 
     /**
@@ -58,8 +70,18 @@ class TireurController extends AbstractController
             $tireur->getMembre()->addRole("ROLE_TIREUR");
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
+
+            $entrainementRepository = $this->getDoctrine()->getManager()->getRepository(Entrainement::class)->findAll();
+
+            foreach ($entrainementRepository as $entrainement){
+                if($tireur->getGroupe()->getId() == $entrainement->getGroupe()->getId()){
+                    $entrainement->addTireur($tireur);
+                    $entityManager->persist($entrainement);
+                }
+            }
+
             $entityManager->persist($tireur->getMembre());
-            $entityManager->flush();
+            //$entityManager->flush();
 
 
             //$entityManager = $this->getDoctrine()->getManager();
@@ -80,9 +102,17 @@ class TireurController extends AbstractController
      */
     public function show(Tireur $tireur): Response
     {
-        return $this->render('tireur/show.html.twig', [
-            'tireur' => $tireur,
-        ]);
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+        foreach ($tireurRepository as $tireur) {
+            if ($tireur->getMembre()->getId() == $idMembreConnecte) {
+                return $this->render('tireur/show.html.twig', [
+                    'tireur' => $tireur,
+                ]);
+            }
+
+        }
     }
 
     /**
@@ -121,7 +151,7 @@ class TireurController extends AbstractController
         return $this->redirectToRoute('tireur_index');
     }
 
-    public function redirectToShowTireur(){
+    /*public function redirectToShowTireur(){
         $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser();
         $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
 
@@ -132,7 +162,7 @@ class TireurController extends AbstractController
                 ]);
             }
         }
-    }
+    }*/
 
     /**
      * @Route("/index/competition",name="competition",methods={"GET"})

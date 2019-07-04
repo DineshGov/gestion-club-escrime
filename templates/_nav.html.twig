@@ -17,7 +17,7 @@
             Escrime
         </a>
         <ul class="navbar-nav mr-auto">
-            {#{% if is_granted('ROLE_ADMIN') %}#}
+            {% if app.user %}
             <li class="nav-item dropdown" style="margin-right: 30px">
                 <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -68,15 +68,24 @@
                     <a class="dropdown-item" href="{{ path('arme_index') }}">Liste Arme</a>
                 </div>
             </li>
+            {% endif %}
 
-
+        </ul>
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('login') }}">
-                    <span class="oi oi-account-login"></span>
-                    Connexion
-                </a>
-            </li>
 
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('logout') }}">
+                        <span class="oi oi-account-login"></span>
+                        Déconnexion
+                    </a>
+                {% else %}
+                    <a class="nav-link" href="{{ path('login') }}">
+                        <span class="oi oi-account-login"></span>
+                        Connexion
+                    </a>
+                {% endif %}
+            </li>
         </ul>
     </nav>
 </div>
