@@ -30,6 +30,8 @@ class PresenceController extends AbstractController
      */
     public function new(Request $request): Response
     {
+
+
         $presence = new Presence();
         $form = $this->createForm(PresenceType::class, $presence);
         $form->handleRequest($request);

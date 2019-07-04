@@ -362,11 +362,9 @@ class Membre implements UserInterface
         $this->rawPassword = null;
     }
 
-    // TODO: Implement __toString() method.
-    /*public function __toString()
+    public function __toString()
     {
-
-        return $this->nom;
-    }*/
-
+        // TODO: Implement __toString() method.
+        return (string)$this->nom;
+    }
 }

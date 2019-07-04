@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         {% for tireur in tireurs %}
-            <tr>
+            <td>
                 <td>{{ tireur.membre.nom }}</td>
                 <td>{{ tireur.membre.prenom }}</td>
                 <td>{{ tireur.membre.dateDeNaissance|date('Y-m-d') }}</td>
@@ -33,28 +33,20 @@
                 <td>{{ tireur.blason }}</td>
                 <td>{{ tireur.niveauSurclassement }}</td>
                 <td>
-                    <ul>
                     {% for arme in tireur.armes %}
+
                         <ul>
                             <li>{{ arme.nom}}</li>
-                        <ul>
-                            <li>{{ arme.nom }}</li>
-                            <li href="{{ path('arme_show', {'id': arme.id}) }}">show</li>
-                            <li href="{{ path('arme_edit', {'id': arme.id}) }}">edit</li>
-                        </ul>
-                    {% else %}
-                        <ul>
-                            <li colspan="3">no records found</li>
                         </ul>
                     {% endfor %}
-                    </ul>
                 </td>
                 <td>
-                    <a class="btn  btn-success" href="{{ path('tireur_show', {'id': tireur.id}) }}">Voir</a>
-                    <a class=" btn btn-warning" href="{{ path('tireur_edit', {'id': tireur.id}) }}">Modifier</a>
+                    <a class="btn btn-success" href="{{ path('tireur_show', {'id': tireur.id}) }}">Voir</a>
+                    <a class="btn btn-warning" href="{{ path('tireur_edit', {'id': tireur.id}) }}">Modifier</a>
                     <a>{{ include('tireur/_delete_form.html.twig') }}</a>
 
                 </td>
+                <td></td>
             </tr>
         {% else %}
             <tr>
