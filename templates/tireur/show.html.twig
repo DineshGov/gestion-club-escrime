@@ -5,7 +5,7 @@
 {% block body %}
     <h1 style="text-align: center">Tireur</h1>
 
-    <a class="btn btn-lg btn-info" style="margin-bottom: 2%" href="{{ path('tireur_index') }}">Retour</a>
+    <a class="btn btn-lg btn-info" style="margin-bottom: 2%" href="{{ path('tireur_home') }}">Retour</a>
 
     <table class="table">
         <tbody>
@@ -76,9 +76,37 @@
         </tr>
 
         <tr>
+            <th>Inscrit aux compétitions:</th>
+            <td>
+                <ul>
+                    {% for competition in tireur.competitions %}
+                        <li>{{ competition.nom}}</li>
+                    {% else %}
+                        <li>Pas de compétition</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Lecons suivies:</th>
+            <td>
+                <ul>
+                    {% for lecon in tireur.lecons %}
+                        <li>{{ lecon.entrainement.date|date('Y-m-d') }} par {{ lecon.entraineur.membre.nom }}</li>
+                    {% else %}
+                        <li>Pas de leçon</li>
+                    {% endfor %}
+                </ul>
+            </td>
+
+        </tr>
+
+        <tr>
             <td>
                 <a class="btn btn-lg btn-success" href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}">Voir les entrainements</a>
             </td>
+            <td></td>
         </tr>
 
         </tbody>

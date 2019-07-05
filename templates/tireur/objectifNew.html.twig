@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    <div>
+        {{ form_label(form.objectif) }}
+        {{ form_errors(form.objectif) }}
+        {{ form_widget(form.objectif) }}
+        {{ form_help(form.objectif) }}
+    </div>
+    <div style="display: none;">
+        <div>
+            {{ form_widget(form.atteint) }}
+        </div>
+
+        <div>
+            {{ form_widget(form.attribuePar) }}
+        </div>
+
+        <div>
+            {{ form_widget(form.tireur) }}
+        </div>
+    </div>
+
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+{%  endblock %}
+
+{% block title %}
+
+{% endblock %}
+

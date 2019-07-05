@@ -11,6 +11,34 @@
                 <th>Id</th>
                 <td>{{ maitre_arme.id }}</td>
             </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ maitre_arme.membre.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date de naissance</th>
+                <td>{{ maitre_arme.membre.dateDeNaissance|date('Y-m-d')}}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ maitre_arme.membre.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Leçons</th>
+                <td>
+                {% if maitre_arme.lecons is not empty  %}
+                    <ul>
+                    {% for lecon in maitre_arme.lecons %}
+                        <li>{{ lecon.entrainement.date|date('Y-m-d')}} avec le tireur {{ lecon.tireur.membre.nom }} {{ lecon.tireur.membre.prenom }}</li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    Pas de lecon
+                {% endif %}
+                </td>
+            </tr>
+
+
         </tbody>
     </table>
 

@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <h1 style="text-align: center; margin-top: 2%;margin-bottom: 2%">Liste des niveaux</h1>
-        <a class=" btn btn-lg btn-primary" href="{{ path('niveau_new') }}" style="float: right; margin-bottom: 2%" >Ajouter</a>
+        <a class=" btn btn-primary" href="{{ path('niveau_new') }}" style="float: right; margin-bottom: 2%" >Ajouter</a>
         {% for niveau in niveaux %}
 
         <table class="table">
@@ -21,8 +21,8 @@
                     <td>{{ niveau.id }}</td>
                     <td>{{ niveau.categorie }}</td>
                     <td>
-                        <a class="btn btn-lg btn-success" href="{{ path('niveau_show', {'id': niveau.id}) }}">Voir</a>
-                        <a class="btn btn-lg btn-warning" href="{{ path('niveau_edit', {'id': niveau.id}) }}">Modifier</a>
+                        <a class="btn btn-sm btn-success" href="{{ path('niveau_show', {'id': niveau.id}) }}">Voir</a>
+                        <a class="btn btn-sm btn-warning" href="{{ path('niveau_edit', {'id': niveau.id}) }}">Modifier</a>
                         <a>{{ include('niveau/_delete_form.html.twig') }}</a>
                     </td>
                 </tr>

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <h4>Liste des objectifs personnel</h4>
+    <ul class="list-group">
+        {% for objectif in tireur.objectifs %}
+            {% if objectif.attribuePar.id == tireur.membre.id %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ objectif.objectif }}
+                {% if objectif.atteint == true %}
+                    <span class="badge badge-success badge-pill">
+                        Atteint
+                    </span>
+                {% else %}
+                    <span class="badge badge-danger badge-pill">
+                        Non atteint
+                    </span>
+                    <span class="badge badge-primary badge-pill">
+                        <a href="{{ path('tireur_objectif_update' , {'id': objectif.id}) }}" style="color: inherit">Valider</a>
+                    </span>
+                {% endif %}
+                </span>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <br>
+    <h4>Liste des objectifs attribués par un maitre d'arme</h4>
+    <ul class="list-group">
+        {% for objectif in tireur.objectifs %}
+            {% if objectif.attribuePar.id != tireur.membre.id %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ objectif.objectif }}<small>Attribué par: {{ objectif.attribuePar.nom }}</small>
+                    {% if objectif.atteint == true %}
+                        <span class="badge badge-success badge-pill">
+                        Atteint
+                        </span>
+                    {% else %}
+                        <span class="badge badge-danger badge-pill">
+                        Non atteint
+                    </span>
+                        <span class="badge badge-primary badge-pill">
+                        Valider
+                    </span>
+                    {% endif %}
+                    </span>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('tireur_objectif_new') }}">New Objectif</a>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

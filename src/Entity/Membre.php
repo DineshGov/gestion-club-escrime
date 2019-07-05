@@ -374,16 +374,8 @@ class Membre implements UserInterface
 
     public function nomPrenom(){
         $dateActuelle=new \DateTime();
-        $format = 'Y-m-!d H:i:s';
         $dateActuelle->format('Y');
-        // $intl_date_formatter = new IntlDateFormatter('fr_FR',
-        //   IntlDateFormatter::SHORT,
-        // IntlDateFormatter::MEDIUM);
-        //$dateActuelle=$intl_date_formatter->format($dateActuelle);
-        //var_dump($dateActuelle);
-        //var_dump($this->dateDeNaissance);
         $age=$dateActuelle->diff($this->dateDeNaissance,true);
-        //var_dump($age->y);die;
         $age=strval($age->y);
         return $this->nom.' '.$this->prenom .' Age : '.$age;
     }
