@@ -50,6 +50,8 @@ class Competition
      */
     private $arbitres;
 
+
+
     public function __construct()
     {
         $this->tireurs = new ArrayCollection();
