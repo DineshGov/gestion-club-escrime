@@ -9,10 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin")
+     * @Route("/admin", name="admin_home")
      */
     public function index()
     {
-        return new Response('<html><body>Admin page!</body></html>');
+        return $this->render("admin/home.html.twig");
     }
 }

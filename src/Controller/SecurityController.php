@@ -39,4 +39,38 @@ class SecurityController extends AbstractController
             'error' => $error,
         ]);
     }
+
+    /**
+     * @Route("/")
+     */
+    public function redirectToLogin(Request $request) {
+        return $this->redirectToRoute('login');
+    }
+
+    /**
+     * Redirect users after login based on the granted ROLE
+     * @Route("/login/redirect", name="_login_redirect")
+     */
+    public function loginRedirectAction(Request $request) {
+        if($this->isGranted('ROLE_ADMIN'))
+        {
+            return $this->redirectToRoute('admin_home');
+        }
+        else if($this->isGranted('ROLE_MAITRE_ARME'))
+        {
+            return $this->redirectToRoute('maitre_arme_index');
+        }
+        else if($this->isGranted('ROLE_TIREUR'))
+        {
+            return $this->redirectToRoute('tireur_home');
+        }
+        else if($this->isGranted('ROLE_ARBITRE'))
+        {
+            return $this->redirectToRoute('arbitre_index');
+        }
+        else
+        {
+            return $this->redirectToRoute('login');
+        }
+    }
 }

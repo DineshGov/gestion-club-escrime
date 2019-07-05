@@ -15,7 +15,6 @@
                 <th>Sexe</th>
                 <th>IdAdmin</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -29,7 +28,6 @@
                 <td>{{ membre.sexe }}</td>
                 <td>{{ membre.isAdmin ? 'Yes' : 'No' }}</td>
                 <td>{{ membre.email }}</td>
-                <td>{{ membre.password }}</td>
                 <td>
                     <a href="{{ path('membre_show', {'id': membre.id}) }}">show</a>
                     <a href="{{ path('membre_edit', {'id': membre.id}) }}">edit</a>

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Membre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -26,6 +27,10 @@ class MembreType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('dateDeNaissance', BirthdayType::class)
+            /*->add('dateDeNaissance',DateType::class,[
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+            ])*/
             ->add('sexe')
             ->add('isAdmin')
             //->add('submit', SubmitType::class, ['label'=>'Envoyer', 'attr'=>['class'=>'btn-primary btn-block']])

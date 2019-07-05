@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use IntlDateFormatter;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MembreRepository")
+ * @ApiResource
  */
 class Membre implements UserInterface
 {
@@ -362,9 +366,25 @@ class Membre implements UserInterface
         $this->rawPassword = null;
     }
 
+    // TODO: Implement __toString() method.
     public function __toString()
     {
-        // TODO: Implement __toString() method.
-        return (string)$this->nom;
+        return $this->nom;
+    }
+
+    public function nomPrenom(){
+        $dateActuelle=new \DateTime();
+        $format = 'Y-m-!d H:i:s';
+        $dateActuelle->format('Y');
+        // $intl_date_formatter = new IntlDateFormatter('fr_FR',
+        //   IntlDateFormatter::SHORT,
+        // IntlDateFormatter::MEDIUM);
+        //$dateActuelle=$intl_date_formatter->format($dateActuelle);
+        //var_dump($dateActuelle);
+        //var_dump($this->dateDeNaissance);
+        $age=$dateActuelle->diff($this->dateDeNaissance,true);
+        //var_dump($age->y);die;
+        $age=strval($age->y);
+        return $this->nom.' '.$this->prenom .' Age : '.$age;
     }
 }

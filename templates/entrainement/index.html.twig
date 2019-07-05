@@ -12,6 +12,7 @@
                 <th>Date</th>
                 <th>Groupe</th>
                 <th>actions</th>
+                <th>Présence</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,16 @@
                     <td>
                         <a class="btn btn-primary" href="{{ path('entrainement_show', {'id': entrainement.id}) }}">show</a>
                         <a class="btn btn-info" href="{{ path('entrainement_edit', {'id': entrainement.id}) }}">edit</a>
+                        <a href="{{ path('validate_presence', {'id': entrainement.presence.id, 'idTireur': tireur.id}) }}">Show feuille</a>
+                    </td>
+                    <td>
+                        {% for presence in tireur.presences %}
+                            {% if presence.entrainement.id == entrainement.id %}
+                                Présent
+                            {% else %}
+                                Absent
+                            {% endif %}
+                        {% endfor %}
                     </td>
                 </tr>
             {% endfor %}
@@ -47,6 +58,7 @@
         {% endif %}
         </tbody>
     </table>
-
-    <a class="btn btn-success" href="{{ path('entrainement_new') }}">Create new</a>
+    {% if not app.request.get('groupe') %}
+        <a class="btn btn-success" href="{{ path('entrainement_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

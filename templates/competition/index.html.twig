@@ -3,8 +3,9 @@
 {% block title %}Competition index{% endblock %}
 
 {% block body %}
-    <h1>Competition index</h1>
+    <h1 style="text-align: center; margin-bottom: 2%;margin-top: 2%">Liste Compétitions</h1>
 
+    <a style="margin-top: 2%;margin-bottom: 2%" class="btn btn-lg btn-primary" href="{{ path('competition_new') }}">Ajouter</a>
     <table class="table">
         <thead>
             <tr>
@@ -12,7 +13,9 @@
                 <th>Nom</th>
                 <th>Date</th>
                 <th>Ville</th>
-                <th>actions</th>
+                <th>Niveau</th>
+                <th>Tireurs</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -22,9 +25,21 @@
                 <td>{{ competition.nom }}</td>
                 <td>{{ competition.date ? competition.date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ competition.ville }}</td>
+                {% for niveau in competition.niveau %}
+                    <td>{{ niveau.categorie}}</td>
+                {% endfor %}
+               {# {%  for tireur in competition.tireurs %}
+                    <td>{{ tireur.membre.nom }}</td>
+                {%  endfor %}#}
                 <td>
-                    <a href="{{ path('competition_show', {'id': competition.id}) }}">show</a>
-                    <a href="{{ path('competition_edit', {'id': competition.id}) }}">edit</a>
+                    <a class="btn btn-lg btn-info" href="{{ path('competition_tireurs', {'id': competition.id}) }}">Liste</a>
+
+                </td>
+                <td>
+                    <a class="btn btn-lg btn-success" href="{{ path('competition_show', {'id': competition.id}) }}">Voir</a>
+                    <a class="btn btn-lg btn-warning" href="{{ path('competition_edit', {'id': competition.id}) }}">Modifier</a>
+                    {{ include('competition/_delete_form.html.twig') }}
+
                 </td>
             </tr>
         {% else %}
@@ -35,5 +50,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('competition_new') }}">Create new</a>
 {% endblock %}

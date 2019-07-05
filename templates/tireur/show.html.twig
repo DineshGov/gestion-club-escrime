@@ -50,16 +50,37 @@
         </tr>
 
         <tr>
-            {% for arme in tireur.armes  %}
-                <th>Arme</th>
-                <td>{{ arme.nom }}</td>
-            {% endfor %}
+            <th>Arme</th>
+                <td>
+                    <ul>
+                        {% for arme in tireur.armes %}
+                            <li>{{ arme.nom }}</li>
+                        {% else %}
+                            <li>Pas d'arme</li>
+                        {% endfor %}
+                    </ul>
+                </td>
         </tr>
+
+        <tr>
+            <th>Présent aux entrainements:</th>
+            <td>
+                <ul>
+                    {% for presence in tireur.presences %}
+                        <li>{{ presence.entrainement.date|date('Y-m-d') }}</li>
+                    {% else %}
+                        <li>Pas d'entrainement</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+
         <tr>
             <td>
                 <a class="btn btn-lg btn-success" href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}">Voir les entrainements</a>
             </td>
         </tr>
+
         </tbody>
     </table>
 

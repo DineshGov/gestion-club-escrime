@@ -1,10 +1,14 @@
 <?php
 namespace App\Entity;
+
+
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TireurRepository")
+ * @ApiResource
  */
 class Tireur
 {
@@ -28,7 +32,7 @@ class Tireur
      */
     private $membre;
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Niveau", inversedBy="tireur")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Niveau", inversedBy="tireur",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $niveau;
@@ -65,6 +69,8 @@ class Tireur
      * @ORM\ManyToMany(targetEntity="App\Entity\Presence", mappedBy="tireursPresents")
      */
     private $presences;
+
+
     public function __construct()
     {
         $this->membre = new Membre();
@@ -75,6 +81,7 @@ class Tireur
         $this->armes = new ArrayCollection();
         $this->presences = new ArrayCollection();
     }
+
     public function getId(): ?int
     {
         return $this->id;

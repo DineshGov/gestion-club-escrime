@@ -22,12 +22,11 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: _login_redirect
             logout:
                 path:  /logout
                 target: /
 
-    role_hierarchy:
-        ROLE_ADMIN:      ROLE_USER
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -39,4 +38,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/member, roles: ROLE_USER }
+        - { path: ^/member, roles: ROLE_MAITRE_ARME }
+        - { path: ^/member, roles: ROLE_TIREUR }
+        - { path: ^/arbitre, roles: ROLE_ARBITRE }

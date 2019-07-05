@@ -17,13 +17,15 @@
             Escrime
         </a>
         <ul class="navbar-nav mr-auto">
-            {#{% if is_granted('ROLE_ADMIN') %}#}
+            {% if app.user %}
             <li class="nav-item dropdown" style="margin-right: 30px">
                 <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 Compétitions
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('competition_new') }}">Ajouter une compétition</a>
+                    <a class="dropdown-item" href="{{ path('competition_index') }}">Liste compétitions</a>
                     <a class="dropdown-item" href="{{ path('niveau_new') }}">Ajouter un niveau</a>
                     <a class="dropdown-item" href="{{ path('niveau_index') }}">Liste niveaux</a>
                 </div>
@@ -40,6 +42,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ path('tireur_new') }}">Ajouter tireur</a>
                     <a class="dropdown-item" href="{{ path('tireur_index') }}">Liste tireur</a>
+                    <a class="dropdown-item" href="">Inscription Compétition</a>
                     <a class="dropdown-item" href="{{ path('objectif_index') }}">Objectifs</a>
                     <a class="dropdown-item" href="{{ path('lecon_index') }}">Leçons</a>
                     <a class="dropdown-item" href="{{ path('presence_index') }}">Présences</a>
@@ -65,62 +68,24 @@
                     <a class="dropdown-item" href="{{ path('arme_index') }}">Liste Arme</a>
                 </div>
             </li>
+            {% endif %}
 
-
+        </ul>
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('login') }}">
-                    <span class="oi oi-account-login"></span>
-                    Connexion
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('logout') }}">
-                    <span class="oi oi-account-login"></span>
-                    Deconnexion
-                </a>
-            </li>
 
-            <li class="nav-item" style="">
-                <a class="nav-link " href="{{ path('groupe_index') }}">
-                    <span class="oi oi-account-logout"></span>
-                    Groupe</a>
-            </li>
-
-            <li class="nav-item" style="">
-                <a class="nav-link " href="{{ path('arbitre_index') }}">
-                    <span class="oi oi-account-logout"></span>
-                    Arbitre</a>
-            </li>
-
-
-
-
-  {#          {% if is_granted('ROLE_ADMIN') %}#}
-
-
-            {#{% endif %}#}
-
-          {#  {% if is_granted('ROLE_USER') %}
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Espace Client
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('logout') }}">
+                        <span class="oi oi-account-login"></span>
+                        Déconnexion
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{ path('app_commande_index') }}">
-                            <span class="oi oi-command"></span>
-                            Commandes
-                        </a>
-                    </div>
-                </li>
-
-                #}{#<li class="nav-item">
-                    <a class="nav-link " href="">Commandes</a>
-                </li>#}{#
-            {% endif %}#}
-
-
+                {% else %}
+                    <a class="nav-link" href="{{ path('login') }}">
+                        <span class="oi oi-account-login"></span>
+                        Connexion
+                    </a>
+                {% endif %}
+            </li>
         </ul>
     </nav>
 </div>

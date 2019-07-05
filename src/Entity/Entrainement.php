@@ -1,10 +1,14 @@
 <?php
 namespace App\Entity;
+
+
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EntrainementRepository")
+ * @ApiResource
  */
 class Entrainement
 {
@@ -24,7 +28,7 @@ class Entrainement
      */
     private $groupe;
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tireur", inversedBy="entrainements")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tireur", inversedBy="entrainements", cascade={"persist","remove"})
      */
     private $tireurs;
     /**

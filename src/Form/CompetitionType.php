@@ -2,7 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Arbitre;
 use App\Entity\Competition;
+use App\Entity\Niveau;
+use App\Entity\Tireur;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,9 +19,30 @@ class CompetitionType extends AbstractType
             ->add('nom')
             ->add('date')
             ->add('ville')
-            ->add('tireurs')
-            ->add('niveau')
-            ->add('arbitres')
+            ->add('tireurs',EntityType::class,[
+                'required' => true,
+                'class' => Tireur::class,
+                'choice_label' => 'membre.nomPrenom',
+                'label' => 'Tireurs',
+                'multiple' => true,
+                'expanded' => false,
+            ])
+            ->add('niveau', EntityType::class, [
+                'required' => true,
+                'class' => Niveau::class,
+                'choice_label' => 'categorie',
+                'label' => 'Niveau',
+                'multiple' => true,
+                'expanded' => false,
+            ])
+            ->add('arbitres',EntityType::class,[
+                'required' => true,
+                'class' => Arbitre::class,
+                'choice_label' =>'membre.nomPrenom',
+                'label' =>'Arbitres',
+                'multiple' => true,
+                'expanded' => false,
+            ])
         ;
     }
 
