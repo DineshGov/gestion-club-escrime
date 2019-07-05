@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Entrainement;
 use App\Entity\Membre;
 use App\Entity\Competition;
+use App\Entity\Objectif;
 use App\Entity\Tireur;
+use App\Form\ObjectifType;
 use App\Form\TireurType;
 use App\Repository\TireurRepository;
 use function dump;
@@ -40,6 +42,94 @@ class TireurController extends AbstractController
         }
         //return $this->render("tireur/home.html.twig");
     }
+
+    /**
+ * @Route("/objectif", name="tireur_objectifs")
+ */
+    public function objectifs()
+    {
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+        foreach ($tireurRepository as $tireur) {
+            if ($tireur->getMembre()->getId() == $idMembreConnecte) {
+                return $this->render('tireur/objectifTireur.html.twig', [
+                    'tireur' => $tireur,
+                ]);
+            }
+
+        }
+        //return $this->render("tireur/home.html.twig");
+    }
+
+    /**
+     * @Route("/objectif/{id}", name="tireur_objectif_update")
+     */
+    public function objectifAtteint(Objectif $objectif)
+    {
+        $objectif->setAtteint(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($objectif);
+        $entityManager->flush();
+
+
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+        foreach ($tireurRepository as $tireur) {
+            if ($tireur->getMembre()->getId() == $idMembreConnecte) {
+                return $this->render('tireur/objectifTireur.html.twig', [
+                    'tireur' => $tireur,
+                ]);
+            }
+        }
+    }
+
+    /**
+     * @Route("/objectifPersonnel/new", name="tireur_objectif_new")
+     */
+    public function tireurObjectifNew(Request $request): Response
+    {
+        $objectif = new Objectif();
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $membre = $this->getDoctrine()->getManager()->getRepository(Membre::class)->find($idMembreConnecte);
+
+        $objectif->setAttribuePar($membre);
+        $objectif->setAtteint(false);
+
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+        foreach ($tireurRepository as $tireur) {
+            if ($tireur->getMembre()->getId() == $idMembreConnecte) {
+                $objectif->setTireur($tireur);
+            }
+        }
+
+        $form = $this->createForm(ObjectifType::class, $objectif);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($objectif);
+            $entityManager->flush();
+
+            foreach ($tireurRepository as $tireur) {
+                if ($tireur->getMembre()->getId() == $idMembreConnecte) {
+                    return $this->render('tireur/objectifTireur.html.twig', [
+                        'tireur' => $tireur,
+                    ]);
+                }
+            }
+        }
+
+        return $this->render('tireur/objectifNew.html.twig', [
+            'objectif' => $objectif,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
 
     /**
      * @Route("/", name="tireur_index", methods={"GET"})
@@ -150,19 +240,6 @@ class TireurController extends AbstractController
 
         return $this->redirectToRoute('tireur_index');
     }
-
-    /*public function redirectToShowTireur(){
-        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser();
-        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
-
-        foreach ($tireurRepository as $tireur){
-            if($tireur->getMembre()->getId() == $idMembreConnecte){
-                return $this->render('tireur/show.html.twig', [
-                    'tireur' => $tireur,
-                ]);
-            }
-        }
-    }*/
 
 
 }
