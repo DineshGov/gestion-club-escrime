@@ -16,7 +16,19 @@
             <span class="oi oi-home"></span>
             Escrime
         </a>
+
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown" style="margin-right: 30px">
+                <a class="nav-link dropdown-toggle" href="{{path('membre_index')}}" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Membre
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('tireur_index') }}">Liste des tireurs</a>
+                    <a class="dropdown-item" href="{{ path('maitre_arme_index') }}">Liste des maitres d'arme</a>
+                    <a class="dropdown-item" href="{{ path('arbitre_index') }}">Liste des arbitres</a>
+                </div>
+            </li>
             <li class="nav-item dropdown" style="margin-right: 30px">
                 <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">

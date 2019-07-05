@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'tireur/base.html.twig' %}
 
 {% block title %}Tireur{% endblock %}
 
 {% block body %}
     <h1 style="text-align: center">Tireur</h1>
 
-    <a class="btn btn-lg btn-info" style="margin-bottom: 2%" href="{{ path('tireur_index') }}">Retour</a>
+    <a class="btn btn-lg btn-info" style="margin-bottom: 2%" href="{{ path('tireur_home') }}">Retour</a>
 
     <table class="table">
         <tbody>
@@ -99,12 +99,14 @@
                     {% endfor %}
                 </ul>
             </td>
+
         </tr>
 
         <tr>
             <td>
                 <a class="btn btn-lg btn-success" href="{{ path('entrainement_index' , {'groupe': tireur.groupe.nom}) }}">Voir les entrainements</a>
             </td>
+            <td></td>
         </tr>
 
         </tbody>

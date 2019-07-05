@@ -1,0 +1,50 @@
+{% extends 'tireur/base.html.twig' %}
+
+{% block title %}Liste des competition{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center; margin-bottom: 2%;margin-top: 2%">Liste des competition du tireur {{ tireur.membre.nom }}</h1>
+
+    <a style="margin-top: 2%;margin-bottom: 2%" class="btn btn-lg btn-primary" href="{{ path('tireur_show', {'id': tireur.id}) }}">Retour</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Date</th>
+            <th>Ville</th>
+            <th>Niveau</th>
+            <th>Tireurs</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for competition in competitions %}
+            {% for niveau in competition.niveau %}
+                {% if tireur.niveau.categorie == niveau.categorie %}
+                    <tr>
+                        <td>{{ competition.id }}</td>
+                        <td>{{ competition.nom }}</td>
+                        <td>{{ competition.date ? competition.date|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ competition.ville }}</td>
+                        <td>{{ niveau.categorie}}</td>
+                        <td>
+                            <a class="btn btn-lg btn-info" href="{{ path('competition_tireurs', {'id': competition.id}) }}">Liste</a>
+
+                        </td>
+                        <td>
+                            <a class="btn btn-lg btn-success" href="{{ path('competition_show', {'id': competition.id}) }}">Voir</a>
+                            <a class="btn btn-lg btn-info" href="{{ path('participe_competition', {'id':competition.id,'idTireur':tireur.id}) }}">Inscription</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

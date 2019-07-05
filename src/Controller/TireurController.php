@@ -241,5 +241,23 @@ class TireurController extends AbstractController
         return $this->redirectToRoute('tireur_index');
     }
 
+    /**
+     * @Route("/competition/liste", name="tireur_competitions")
+     */
+    public function listCompetition(){
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+        $competitionRepository = $this->getDoctrine()->getManager()->getRepository(Competition::class)->findAll();
+
+        foreach ($tireurRepository as $tireur) {
+            if ($tireur->getMembre()->getId() == $idMembreConnecte) {
+                return $this->render('tireur/competitionTireur.html.twig', [
+                    'tireur' => $tireur,
+                    'competitions' => $competitionRepository,
+                ]);
+            }
+        }
+    }
+
 
 }
