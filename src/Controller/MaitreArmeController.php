@@ -16,6 +16,26 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class MaitreArmeController extends AbstractController
 {
+
+    /**
+     * @Route("/home", name="maitre_arme_home")
+     */
+    public function home()
+    {
+        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+        $maitreArmeRepository = $this->getDoctrine()->getManager()->getRepository(MaitreArme::class)->findAll();
+
+        foreach ($maitreArmeRepository as $maitreArme) {
+            if ($maitreArme->getMembre()->getId() == $idMembreConnecte) {
+                return $this->render('maitre_arme/home.html.twig', [
+                    'maitreArme' => $maitreArme,
+                ]);
+            }
+
+        }
+        //return $this->render("tireur/home.html.twig");
+    }
+
     /**
      * @Route("/", name="maitre_arme_index", methods={"GET"})
      */

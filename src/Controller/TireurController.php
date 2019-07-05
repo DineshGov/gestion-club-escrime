@@ -194,14 +194,19 @@ class TireurController extends AbstractController
     {
         $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
         $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
-
+        $found = false;
         foreach ($tireurRepository as $tireur) {
             if ($tireur->getMembre()->getId() == $idMembreConnecte) {
+                $found = true;
                 return $this->render('tireur/show.html.twig', [
                     'tireur' => $tireur,
                 ]);
             }
-
+        }
+        if ($found == false) {
+            return $this->render('tireur/show.html.twig', [
+                'tireur' => $tireur,
+            ]);
         }
     }
 

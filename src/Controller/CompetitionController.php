@@ -7,6 +7,7 @@ use App\Entity\Niveau;
 use App\Entity\Tireur;
 use App\Form\CompetitionType;
 use App\Repository\CompetitionRepository;
+use function dump;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,20 +23,26 @@ class CompetitionController extends AbstractController
      */
     public function index(CompetitionRepository $competitionRepository): Response
     {
-        $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
-        $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
-        foreach ($tireurRepository as $tireur){
-            if($tireur->getMembre()->getId() == $idMembreConnecte){
-                return $this->render('competition/index.html.twig', [
-                    'tireur' => $tireur,
-                    'competitions' => $competitionRepository->findAll(),
-                ]);
+        $rolesMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getRoles();
+        //dump($rolesMembreConnecte[0]);die;
+        if($rolesMembreConnecte[0] == 'ROLE_TIREUR'){
+            $idMembreConnecte = $this->get('security.token_storage')->getToken()->getUser()->getId();
+            $tireurRepository = $this->getDoctrine()->getManager()->getRepository(Tireur::class)->findAll();
+
+            foreach ($tireurRepository as $tireur){
+                if($tireur->getMembre()->getId() == $idMembreConnecte){
+                    return $this->render('competition/index.html.twig', [
+                        'tireur' => $tireur,
+                        'competitions' => $competitionRepository->findAll(),
+                    ]);
+                }
             }
         }
-        //dump($competitionRepository->findAll());die;
-        return $this->render('competition/index.html.twig', [
-            'competitions' => $competitionRepository->findAll(),
-        ]);
+        else{
+            return $this->render('competition/index.html.twig', [
+                'competitions' => $competitionRepository->findAll(),
+            ]);
+        }
     }
 
     /**

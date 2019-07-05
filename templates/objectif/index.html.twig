@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Objectif</th>
+                <th>Attribué à</th>
+                <th>Attribué par</th>
                 <th>Atteint</th>
                 <th>actions</th>
             </tr>
@@ -19,7 +21,9 @@
             <tr>
                 <td>{{ objectif.id }}</td>
                 <td>{{ objectif.objectif }}</td>
-                <td>{{ objectif.atteint ? 'Yes' : 'No' }}</td>
+                <td>{{ objectif.tireur.membre.prenom }} {{ objectif.tireur.membre.nom }}</td>
+                <td>{{ objectif.attribuePar.prenom }} {{ objectif.attribuePar.nom }}</td>
+                <td>{{ objectif.atteint ? '<span class="badge badge-success">Atteint</span>' : '<span class="badge badge-danger">Non atteint</span>' }}</td>
                 <td>
                     <a href="{{ path('objectif_show', {'id': objectif.id}) }}">show</a>
                     <a href="{{ path('objectif_edit', {'id': objectif.id}) }}">edit</a>

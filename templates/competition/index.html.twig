@@ -5,7 +5,7 @@
 {% block body %}
     <h1 style="text-align: center; margin-bottom: 2%;margin-top: 2%">Liste Compétitions</h1>
 
-    <a style="margin-top: 2%;margin-bottom: 2%" class="btn btn-lg btn-primary" href="{{ path('competition_new') }}">Ajouter</a>
+    <a style="margin-top: 2%;margin-bottom: 2%" class="btn btn-sm btn-primary" href="{{ path('competition_new') }}">Ajouter</a>
     <table class="table">
         <thead>
             <tr>
@@ -32,14 +32,17 @@
                     <td>{{ tireur.membre.nom }}</td>
                 {%  endfor %}#}
                 <td>
-                    <a class="btn btn-lg btn-info" href="{{ path('competition_tireurs', {'id': competition.id}) }}">Liste</a>
+                    <a class="btn btn-sm btn-info" href="{{ path('competition_tireurs', {'id': competition.id}) }}">Liste</a>
 
                 </td>
                 <td>
-                    <a class="btn btn-lg btn-success" href="{{ path('competition_show', {'id': competition.id}) }}">Voir</a>
-                    <a class="btn btn-lg btn-warning" href="{{ path('competition_edit', {'id': competition.id}) }}">Modifier</a>
+                    <a class="btn btn-sm btn-success" href="{{ path('competition_show', {'id': competition.id}) }}">Voir</a>
+                    <a class="btn btn-sm btn-warning" href="{{ path('competition_edit', {'id': competition.id}) }}">Modifier</a>
                     {{ include('competition/_delete_form.html.twig') }}
-                    <a class="btn btn-lg btn-info" href="{{ path('participe_competition', {'id':competition.id,'idTireur':tireur.id}) }}">Inscription</a>
+
+                    {% if is_granted('ROLE_TIREUR') %}
+                        <a class="btn btn-sm btn-info" href="{{ path('participe_competition', {'id':competition.id,'idTireur':tireur.id}) }}">Inscription</a>
+                    {% endif %}
 
 
                 </td>

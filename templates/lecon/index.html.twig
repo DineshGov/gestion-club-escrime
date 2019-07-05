@@ -9,6 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Lors de l'entrainement du</th>
+                <th>Pour le tireur</th>
+                <th>Par le maitre d'arme</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -16,6 +19,9 @@
         {% for lecon in lecons %}
             <tr>
                 <td>{{ lecon.id }}</td>
+                <td>{{ lecon.entrainement.date|date('d-m-Y') }}</td>
+                <td>{{ lecon.tireur.membre.prenom }} {{ lecon.tireur.membre.nom }}</td>
+                <td>{{ lecon.entraineur.membre.prenom }} {{ lecon.entraineur.membre.nom }}</td>
                 <td>
                     <a href="{{ path('lecon_show', {'id': lecon.id}) }}">show</a>
                     <a href="{{ path('lecon_edit', {'id': lecon.id}) }}">edit</a>

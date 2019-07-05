@@ -58,7 +58,7 @@ class SecurityController extends AbstractController
         }
         else if($this->isGranted('ROLE_MAITRE_ARME'))
         {
-            return $this->redirectToRoute('maitre_arme_index');
+            return $this->redirectToRoute('maitre_arme_home');
         }
         else if($this->isGranted('ROLE_TIREUR'))
         {

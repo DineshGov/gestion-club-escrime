@@ -12,80 +12,116 @@
     </div>
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{path('app_default_home')}}">
-            <span class="oi oi-home"></span>
-            Escrime
-        </a>
-        <ul class="navbar-nav mr-auto">
-            {% if app.user %}
-            <li class="nav-item dropdown" style="margin-right: 30px">
-                <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Compétitions
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ path('competition_new') }}">Ajouter une compétition</a>
-                    <a class="dropdown-item" href="{{ path('competition_index') }}">Liste compétitions</a>
-                    <a class="dropdown-item" href="{{ path('niveau_new') }}">Ajouter un niveau</a>
-                    <a class="dropdown-item" href="{{ path('niveau_index') }}">Liste niveaux</a>
-                </div>
-            </li>
-            {#{% endif %}#}
-            <li class="nav-item" style="padding-right: 10px">
-                <a class="nav-link " href="{{ path('entrainement_index') }}">Entrainements</a>
-            </li>
-            <li class="nav-item dropdown" style="margin-right: 30px">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Tireur
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ path('tireur_new') }}">Ajouter tireur</a>
-                    <a class="dropdown-item" href="{{ path('tireur_index') }}">Liste tireur</a>
-                    <a class="dropdown-item" href="">Inscription Compétition</a>
-                    <a class="dropdown-item" href="{{ path('objectif_index') }}">Objectifs</a>
-                    <a class="dropdown-item" href="{{ path('lecon_index') }}">Leçons</a>
-                    <a class="dropdown-item" href="{{ path('presence_index') }}">Présences</a>
-                    <a class="dropdown-item" href="">
-                        <span class="oi oi-command"></span>
-                        Performance</a>
-                </div>
-            </li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a class="navbar-brand" href="{{path('admin_home')}}">
+                <span class="oi oi-home"></span>
+                Escrime
+            </a>
 
-                <li class="nav-item" style="">
-                    <a class="nav-link " href="{{ path('maitre_arme_index') }}">
-                        <span class="oi oi-account-logout"></span>
-                        Maitre d'arme</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown" style="margin-right: 30px">
+                    <a class="nav-link dropdown-toggle" href="{{path('membre_index')}}" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Membre
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('tireur_index') }}">Liste des tireurs</a>
+                        <a class="dropdown-item" href="{{ path('maitre_arme_index') }}">Liste des maitres d'arme</a>
+                        <a class="dropdown-item" href="{{ path('arbitre_index') }}">Liste des arbitres</a>
+                    </div>
                 </li>
 
-            <li class="nav-item dropdown" style="margin-right: 30px">
-                <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Armes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ path('arme_new') }}">Ajouter une arme</a>
-                    <a class="dropdown-item" href="{{ path('arme_index') }}">Liste Arme</a>
-                </div>
-            </li>
-            {% endif %}
+                <li class="nav-item dropdown" style="margin-right: 30px">
+                    <a class="nav-link dropdown-toggle" href="{{path('membre_index')}}" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Entrainement
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('entrainement_index') }}">Liste des entrainements</a>
+                        <a class="dropdown-item" href="{{ path('lecon_index') }}">Liste des leçons</a>
+                        <a class="dropdown-item" href="{{ path('objectif_index') }}">Liste des objectifs</a>
+                    </div>
+                </li>
 
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+                <li class="nav-item dropdown" style="margin-right: 30px">
+                    <a class="nav-link dropdown-toggle" href="href="{{path('competition_new')}}"" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Compétitions
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('competition_index') }}">Liste des compétitions</a>
+                    </div>
+                </li>
 
-                {% if app.user %}
+                <li class="nav-item dropdown" style="margin-right: 30px">
+                    <a class="nav-link dropdown-toggle" href="{{path('membre_index')}}" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Autres
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('arme_index') }}">Liste des armes</a>
+                        <a class="dropdown-item" href="{{ path('groupe_index') }}">Liste des groupes</a>
+                        <a class="dropdown-item" href="{{ path('niveau_index') }}">Liste des niveaux</a>
+                    </div>
+                </li>
+
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ path('logout') }}">
                         <span class="oi oi-account-login"></span>
-                        Déconnexion
+                        Deconnexion
                     </a>
-                {% else %}
-                    <a class="nav-link" href="{{ path('login') }}">
+                </li>
+            </ul>
+        {% elseif is_granted('ROLE_TIREUR') %}
+            <a class="navbar-brand" href="{{path('tireur_home')}}">
+                <span class="oi oi-home"></span>
+                Escrime
+            </a>
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('logout') }}">
                         <span class="oi oi-account-login"></span>
-                        Connexion
+                        Deconnexion
                     </a>
-                {% endif %}
-            </li>
-        </ul>
+                </li>
+            </ul>
+        {% elseif is_granted('ROLE_MAITRE_ARME') %}
+            <a class="navbar-brand" href="{{ path('maitre_arme_home') }}">
+                <span class="oi oi-home"></span>
+                Escrime
+            </a>
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('logout') }}">
+                        <span class="oi oi-account-login"></span>
+                        Deconnexion
+                    </a>
+                </li>
+            </ul>
+        {% else %}
+                <a class="navbar-brand" href="{{path('login')}}">
+                    <span class="oi oi-home"></span>
+                    Escrime
+                </a>
+                <ul class="navbar-nav mr-auto">
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('login') }}">
+                            <span class="oi oi-account-login"></span>
+                            Connexion
+                        </a>
+                    </li>
+                </ul>
+        {% endif %}
     </nav>
 </div>

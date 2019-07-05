@@ -15,6 +15,7 @@
                 <th>Sexe</th>
                 <th>IdAdmin</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -28,6 +29,19 @@
                 <td>{{ membre.sexe }}</td>
                 <td>{{ membre.isAdmin ? 'Yes' : 'No' }}</td>
                 <td>{{ membre.email }}</td>
+                {% for role in membre.roles %}
+                    {% if role == 'ROLE_ADMIN' %}
+                        <td>Administrateur</td>
+                    {% elseif role == 'ROLE_TIREUR' %}
+                        <td>Tireur</td>
+                    {% elseif role == 'ROLE_MAITRE_ARME' %}
+                        <td>Maitre d'arme</td>
+                    {% elseif role == 'ROLE_ARBITRE' %}
+                        <td>Arbitre</td>
+                    {% else %}
+                        <td>Erreur</td>
+                    {% endif %}
+                {% endfor %}
                 <td>
                     <a href="{{ path('membre_show', {'id': membre.id}) }}">show</a>
                     <a href="{{ path('membre_edit', {'id': membre.id}) }}">edit</a>
